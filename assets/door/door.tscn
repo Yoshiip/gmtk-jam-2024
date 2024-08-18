@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://biomje0x5ytv5"]
+
+[ext_resource type="Script" path="res://assets/door/door.gd" id="1_50trt"]
+
+[node name="Door" type="Marker3D" groups=["GroupTrigger"]]
+script = ExtResource("1_50trt")
+
+[node name="Mesh" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+use_collision = true
+size = Vector3(4, 4, 0.25)

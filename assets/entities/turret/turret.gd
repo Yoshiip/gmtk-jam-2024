@@ -13,7 +13,8 @@ const BASE_FIRE_SPEED := 0.125
 func _get_player() -> void:
 	player = root.player
 
-@onready var cannon_point: Marker3D = $Cannon/CSGBox3D2/CannonPoint
+@onready var cannon_point: Marker3D = $Turret/CannonPoint
+@onready var mesh: Node3D = $Mesh
 
 func shoot() -> void:
 	var projectile := PROJECTILE.instantiate()
@@ -29,7 +30,6 @@ func _process(delta: float) -> void:
 			if fire_speed < 0.0:
 				shoot()
 			var direction := (player.global_position - global_position).normalized()
-			var angle_y := atan2(direction.x, direction.z)
-			$Cannon.rotation.y = angle_y
+			mesh.rotation.y = atan2(direction.x, direction.z)
 	else:
 		_get_player()

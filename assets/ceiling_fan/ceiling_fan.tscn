@@ -21,3 +21,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.399658, 0)
 shape = SubResource("CylinderShape3D_4o2j6")
 
 [connection signal="body_entered" from="Fan" to="Fan" method="_on_body_entered"]
+
+[editable path="Fan/ceiling_fan"]

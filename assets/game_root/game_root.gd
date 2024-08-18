@@ -1,6 +1,7 @@
 class_name GameRoot
 extends Node3D
 
+@export var is_puzzle := false
 @export var floor_id := 0
 const PLAYER = preload("res://assets/entities/player/player.tscn")
 const CLONE_PATH_FOLLOW = preload("res://assets/entities/clone/path_follow/clone_path_follow.tscn")
@@ -21,16 +22,18 @@ func add_player() -> void:
 	add_child(player)
 
 func _ready() -> void:
-	show_dialogue("You", "It's too heavy, i can't hold it!")
-	add_player()
-	var clones : Array[Clone]
-	clones.assign($Clones.get_children())
-	for clone in clones:
-		if clone.moving:
-			var path := $Paths.get_node_or_null(NodePath(clone.path_id))
-			var path_follow := CLONE_PATH_FOLLOW.instantiate()
-			clone.path_follow = path_follow
-			path.add_child(path_follow)
+	if is_puzzle:
+		player = $Player
+	else:
+		add_player()
+		var clones : Array[Clone]
+		clones.assign($Clones.get_children())
+		for clone in clones:
+			if clone.moving:
+				var path := $Paths.get_node_or_null(NodePath(clone.path_id))
+				var path_follow := CLONE_PATH_FOLLOW.instantiate()
+				clone.path_follow = path_follow
+				path.add_child(path_follow)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -96,8 +99,10 @@ func slow_down_game() -> void:
 
 
 
-func trigger_group() -> void:
-	pass
+func trigger_group(from: Node3D, group_id: int) -> void:
+	for object in get_tree().get_nodes_in_group("GroupTrigger"):
+		if object.trigger_group == group_id:
+			object.trigger(from)
 
 @onready var dialogue_box: Panel = $CanvasLayer/Container/Dialogue
 @onready var dialogue_author: RichTextLabel = $CanvasLayer/Container/Dialogue/Author

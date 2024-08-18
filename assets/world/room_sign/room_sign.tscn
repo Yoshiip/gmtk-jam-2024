@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbw1eq2sdv7ii"]
+
+[ext_resource type="Script" path="res://assets/world/room_sign/room_sign.gd" id="1_p5fjx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vw5v"]
+roughness = 0.3
+emission = Color(1, 1, 1, 1)
+
+[node name="RoomSign" type="Node3D"]
+script = ExtResource("1_p5fjx")
+
+[node name="Box" type="CSGBox3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.000676718, 0, 0.0784647)
+size = Vector3(0.8, 1.2, 0.1)
+material = SubResource("StandardMaterial3D_8vw5v")
+
+[node name="FloorLabel" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.10219, 0.45049, 0.0261549)
+shaded = true
+modulate = Color(0.051971, 0.051971, 0.051971, 1)
+text = "FLOOR"
+outline_size = 0
+
+[node name="CurrentFloor" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.262205, 0.160015, 0.0261549)
+shaded = true
+modulate = Color(0, 0, 0, 1)
+text = "0"
+font_size = 48
+outline_size = 0
+
+[node name="Section" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.365071, -0.591071, 0.0261549)
+shaded = true
+modulate = Color(0.60933, 0.60933, 0.60933, 1)
+font_size = 24
+outline_size = 0
+horizontal_alignment = 2
+vertical_alignment = 2
+uppercase = true
+autowrap_mode = 3
+width = 140.0

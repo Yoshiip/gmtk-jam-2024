@@ -11,6 +11,9 @@ var holded := false:
 		holded = value
 		$CollisionShape.disabled = holded
 
+func _ready() -> void:
+	_transition_scale()
+
 func _get_scale(index = -1) -> Vector3:
 	if index == -1:
 		var s: float = scales[current_scale]
@@ -36,13 +39,13 @@ func _can_change_scale(new_scale: float) -> bool:
 	return space_query.is_empty()
 
 func _transition_scale() -> void:
+	print("transition")
 	var tween := create_tween()
 	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property($Mesh, "scale", _get_scale(), 0.3)
 	tween.set_parallel()
 	tween.tween_property($CollisionShape, "scale", _get_scale(), 0.0)
-
 
 func on_scale(plus := true) -> void:
 	if plus:
@@ -56,7 +59,11 @@ func on_scale(plus := true) -> void:
 	_transition_scale()
 
 func on_hold(picked_up := true) -> void:
-	$CollisionShape.disabled = picked_up
-	sleeping = !picked_up
-	if !picked_up:
-		apply_central_impulse(Vector3.ONE)
+	holded = picked_up
+	if picked_up:
+		freeze = true
+	else:
+		freeze = false
+		throwed = true
+		var player := get_tree().get_nodes_in_group("Player")[0]
+		apply_impulse(((global_position - player.global_position) * Vector3(1, 0, 1)).normalized() * 10.0 + Vector3(0, 2, 0))

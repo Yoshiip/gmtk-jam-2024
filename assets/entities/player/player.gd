@@ -52,23 +52,27 @@ func _handle_scale_device() -> void:
 func _handle_interact() -> void:
 	can_hold_looking = false
 	if holded:
-		if Input.is_action_just_pressed("pickup"):
+		if Input.is_action_just_pressed("interact"):
 			holded.on_hold(false)
 			holded = null
 	elif main_ray.is_colliding():
 		var collider := main_ray.get_collider()
-		if is_instance_valid(collider) && collider.get("holdable"):
+		
+		if is_instance_valid(collider) && collider.has_method("on_interact"):
+			if Input.is_action_just_pressed("interact"):
+				collider.on_interact()
+		elif is_instance_valid(collider) && collider.get("holdable"):
 			can_hold_looking = true
-			if Input.is_action_just_pressed("pickup"):
+			if Input.is_action_just_pressed("interact"):
 				collider.on_hold(true)
 				holded = collider
 	can_scale_looking = false
 	
 	if main_ray.is_colliding():
 		var collider := main_ray.get_collider()
-		if collider.collision_layer ^ SCALABLE_FLAG == 1:
+		if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
 			can_scale_looking = true
-			if Input.is_action_pressed("interact") && gun_cooldown <= 0.0:
+			if Input.is_action_pressed("scale") && gun_cooldown <= 0.0:
 				collider.on_scale(scale_mode_up)
 				trauma = 0.2
 				gun_cooldown = BASE_GUN_COOLDOWN

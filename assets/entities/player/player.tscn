@@ -30,7 +30,7 @@ mesh = SubResource("CapsuleMesh_oekmp")
 surface_material_override/0 = SubResource("StandardMaterial3D_rpc2o")
 
 [node name="Head" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
@@ -55,6 +55,6 @@ cull_mask = 1048574
 current = true
 
 [node name="MainRay" type="RayCast3D" parent="Head/Camera"]
-target_position = Vector3(0, 0, -4)
-collision_mask = 2
+target_position = Vector3(0, 0, -8)
+collision_mask = 10
 collide_with_areas = true

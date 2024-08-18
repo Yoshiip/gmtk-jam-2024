@@ -1,7 +1,7 @@
 extends Prop
 
-func on_scale(plus : bool) -> void:
-	if plus:
+func on_scale(scaled_up := true) -> void:
+	if scaled_up:
 		var new_scale: float = min(current_scale + 1, scales.size() - 1)
 		if _can_change_scale(new_scale):
 			current_scale = new_scale

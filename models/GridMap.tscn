@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvwk5t10s8mjm"]
+
+[ext_resource type="Material" uid="uid://cnbvhajagbh3s" path="res://assets/materials/modular_floor/Floor.tres" id="1_xd4cc"]
+[ext_resource type="BoxMesh" uid="uid://b106wi05f8hyg" path="res://assets/materials/puzzles/0.tres" id="2_jx0me"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5eifu"]
+material = ExtResource("1_xd4cc")
+size = Vector3(2, 2, 2)
+
+[node name="GridMap" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5eifu")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+mesh = ExtResource("2_jx0me")

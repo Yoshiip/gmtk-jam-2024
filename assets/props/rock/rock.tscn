@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://8uop1bhpw4yp"]
+[gd_scene load_steps=7 format=3 uid="uid://8uop1bhpw4yp"]
 
 [ext_resource type="Script" path="res://assets/props/rock/rock.gd" id="1_wjlq5"]
 [ext_resource type="PackedScene" uid="uid://c2pjuylgpnh5f" path="res://assets/props/rock/rock.blend" id="2_cnd51"]
+[ext_resource type="Material" uid="uid://ddljjt6mdagob" path="res://assets/entities/clone/outline_material.tres" id="3_162fg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vxqof"]
+bounce = 0.3
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0gq47"]
-height = 0.187
-radius = 0.164
+[sub_resource type="BoxShape3D" id="BoxShape3D_gr620"]
+size = Vector3(0.25, 0.175, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g1ll2"]
+next_pass = ExtResource("3_162fg")
+albedo_color = Color(0.0846899, 0.0846899, 0.0846899, 1)
+metallic = 0.15
+metallic_specular = 0.4
 
 [node name="Rock" type="RigidBody3D"]
 collision_layer = 3
@@ -24,9 +31,14 @@ scales = Array[float]([1.0, 6.0, 10.0])
 holdable = true
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_0gq47")
+shape = SubResource("BoxShape3D_gr620")
 
 [node name="Mesh" parent="." instance=ExtResource("2_cnd51")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.016315)
 
+[node name="Cube" parent="Mesh" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_g1ll2")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+
+[editable path="Mesh"]

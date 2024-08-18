@@ -15,12 +15,15 @@ var current_scale := Vector3.ONE
 
 var path_follow: ClonePathFollow
 
+@onready var base_position := position
+
 func _process(delta: float) -> void:
 	if player_inside_area && !player.safe:
 		$DetectionRayCast.look_at(player.global_position + Vector3.UP)
 		if $DetectionRayCast.is_colliding():
 			if $DetectionRayCast.get_collider().name == "Player":
-				root.player_detected(delta)
+				pass
+				#root.player_detected(delta)
 
 func _get_scale() -> Vector3:
 	var s : float = SCALES[current_scale_index]
@@ -28,9 +31,21 @@ func _get_scale() -> Vector3:
 
 
 func _physics_process(delta: float) -> void:
-	if moving:
+	if player_inside_area && !player.safe:
+		velocity = (player.position - position).normalized() * SPEED * 2.0
+	elif moving:
 		path_follow.progress += SPEED * delta * root.game_speed
-		global_transform = path_follow.global_transform.scaled_local(current_scale)
+		velocity = (path_follow.global_position - position).normalized() * SPEED
+	elif !position.is_equal_approx(base_position):
+		velocity = (base_position - position).normalized() * SPEED * 2.0
+	else:
+		velocity = velocity.lerp(Vector3.ZERO, delta * 20.0)
+	if velocity != Vector3.ZERO:
+		var velocity_n := velocity.normalized()
+		print(lerp(rotation.y, atan2(velocity_n.x, velocity_n.z), delta * 0.5))
+		rotation.y = lerp(rotation.y, atan2(velocity_n.x, velocity_n.z), delta * 0.5)
+	
+	move_and_slide()
 
 func _transition_scale() -> void:
 	var tween := create_tween()
