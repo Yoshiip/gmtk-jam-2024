@@ -1,13 +1,14 @@
 extends StaticBody3D
 
+const PROJECTILE = preload("res://assets/entities/turret/projectile/projectile.tscn")
+
 var player: Player
 
-@onready var root: GameRoot = get_tree().current_scene
 
 const BASE_FIRE_SPEED := 0.125
+@onready var root: GameRoot = get_tree().current_scene
 @onready var fire_speed := BASE_FIRE_SPEED
 
-const PROJECTILE = preload("res://assets/turret/projectile/projectile.tscn")
 
 func _get_player() -> void:
 	player = root.player

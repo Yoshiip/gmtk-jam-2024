@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dl8lpoqkiafbn"]
+
+[node name="Elevator" type="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+size = Vector3(2, 4, 2)
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.01983, 0, 0)
+text = "Elevator"

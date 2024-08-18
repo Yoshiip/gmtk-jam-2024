@@ -2,18 +2,17 @@ class_name GameRoot
 extends Node3D
 
 @export var floor_id := 0
-
-const CLONE_PATH_FOLLOW = preload("res://assets/clone/path_follow/clone_path_follow.tscn")
+const PLAYER = preload("res://assets/entities/player/player.tscn")
+const CLONE_PATH_FOLLOW = preload("res://assets/entities/clone/path_follow/clone_path_follow.tscn")
 
 var game_speed := 1.0
 var detection := 0.0
 var last_detected := Time.get_ticks_msec()
 var player : Player
 var moving_time := false
+@onready var vignette_material: ShaderMaterial = $CanvasLayer/Container/Vignette.material
 
 @onready var detection_progress_bar: ProgressBar = $CanvasLayer/Container/Detection/ProgressBar
-const PLAYER = preload("res://assets/player/player.tscn")
-
 func add_player() -> void:
 	player = PLAYER.instantiate()
 	for cell in $Cells.get_children():
@@ -56,9 +55,13 @@ func _process(delta: float) -> void:
 	actions.get_node("Scale").visible = player.can_scale_looking
 	actions.get_node("Hold").visible = player.can_hold_looking
 	detection_progress_bar.value = detection
+	
+	if Time.get_ticks_msec() - last_detected > 6500:
+		detection -= delta * 0.125
 
 func player_detected(delta: float) -> void:
-	detection += 0.5 * delta
+	vignette_material.set_shader_parameter("color", Color.RED)
+	detection += 0.75 * delta
 	last_detected = Time.get_ticks_msec()
 	if detection >= 1.0:
 		player_busted()

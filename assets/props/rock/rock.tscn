@@ -12,10 +12,15 @@ radius = 0.164
 [node name="Rock" type="RigidBody3D"]
 collision_layer = 3
 collision_mask = 3
+input_ray_pickable = false
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_vxqof")
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_wjlq5")
+scales = Array[float]([1.0, 6.0, 10.0])
 holdable = true
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
@@ -23,3 +28,5 @@ shape = SubResource("CylinderShape3D_0gq47")
 
 [node name="Mesh" parent="." instance=ExtResource("2_cnd51")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.016315)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -4,8 +4,12 @@ extends RigidBody3D
 @export var scales: Array[float] = []
 @export var current_scale := 0
 @export var holdable := false
+var throwed := false
 
-var holded := false
+var holded := false:
+	set(value):
+		holded = value
+		$CollisionShape.disabled = holded
 
 func _get_scale(index = -1) -> Vector3:
 	if index == -1:
@@ -36,10 +40,11 @@ func _transition_scale() -> void:
 	tween.set_parallel()
 	tween.set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property($Mesh, "scale", _get_scale(), 0.3)
+	tween.set_parallel()
 	tween.tween_property($CollisionShape, "scale", _get_scale(), 0.0)
 
 
-func on_scale(plus : bool) -> void:
+func on_scale(plus := true) -> void:
 	if plus:
 		var new_scale: float = min(current_scale + 1, scales.size() - 1)
 		if _can_change_scale(new_scale):

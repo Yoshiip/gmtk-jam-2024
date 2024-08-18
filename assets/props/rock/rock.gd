@@ -1,24 +1,5 @@
-extends RigidBody3D
+extends Prop
 
-const SCALES := [1.0, 5.0, 10.0]
-var current_scale := 0
-@onready var root := get_tree().current_scene
-
-var throwed := false
-var holded := false:
-	set(value):
-		holded = value
-		$CollisionShape.disabled = holded
-
-@export var holdable := false
-
-func _transition_scale() -> void:
-	var tween := create_tween()
-	tween.set_trans(Tween.TRANS_SPRING)
-	var s : float = SCALES[current_scale]
-	tween.tween_property($Mesh, "scale", Vector3(s, s, s), 0.3)
-	tween.set_parallel()
-	tween.tween_property($CollisionShape, "scale", Vector3(s, s, s), 0.0)
 
 
 func _physics_process(delta: float) -> void:
@@ -26,16 +7,24 @@ func _physics_process(delta: float) -> void:
 		linear_velocity = Vector3.ZERO
 		angular_velocity = Vector3.ZERO
 
-func on_scale(plus : bool) -> void:
-	if plus:
-		current_scale = min(current_scale + 1, SCALES.size() - 1)
+func on_scale(scaled_up := true) -> void:
+	if scaled_up:
+		current_scale = min(current_scale + 1, scales.size() - 1)
 	else:
 		current_scale = max(current_scale - 1, 0)
 	_transition_scale()
 	holdable = current_scale == 0
 
-func on_hold(start: bool) -> void:
-	if !start:
+func on_hold(picked_up := true) -> void:
+	if picked_up:
+		sleeping = true
+	else:
 		throwed = true
 		var player := get_tree().get_nodes_in_group("Player")[0]
 		apply_impulse(((global_position - player.global_position) * Vector3(1, 0, 1)).normalized() * 10.0 + Vector3(0, 2, 0))
+
+
+func _on_body_entered(body: Node) -> void:
+	if body.is_in_group("Clone") and linear_velocity.length() > 2.0:
+		body.kill()
+		queue_free()

@@ -38,11 +38,11 @@ light_color = Color(0.929412, 0, 0, 1)
 [node name="CollisionShape3D" type="CollisionPolygon3D" parent="DetectionArea"]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 2, 0)
 depth = 4.0
-polygon = PackedVector2Array(-0.5, 0.5, 4, 2, 4, -2, -0.5, -0.5)
+polygon = PackedVector2Array(-0.5, 0.5, 20, 10, 20, -10, -0.5, -0.5)
 
 [node name="DetectionRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-target_position = Vector3(0, 0, -10)
+target_position = Vector3(0, 0, -30)
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

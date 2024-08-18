@@ -1,14 +1,14 @@
 class_name Clone
 extends CharacterBody3D
 
+const CLONE_DEAD_PARTICLES = preload("res://assets/entities/clone/dead_particles/clone_dead_particles.tscn")
+
 @export var moving := false
 @export var path_id : StringName = ""
 
 @onready var root := get_tree().current_scene
-const CLONE_DEAD_PARTICLES = preload("res://assets/clone/dead_particles/clone_dead_particles.tscn")
 const SPEED = 1.0
 const JUMP_VELOCITY = 4.5
-
 const SCALES := [0.4, 0.75, 1.0, 1.5, 2.0, 3.0]
 var current_scale_index := 2
 var current_scale := Vector3.ONE

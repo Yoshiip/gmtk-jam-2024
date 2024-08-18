@@ -57,7 +57,7 @@ func _handle_interact() -> void:
 			holded = null
 	elif main_ray.is_colliding():
 		var collider := main_ray.get_collider()
-		if collider.get("holdable"):
+		if is_instance_valid(collider) && collider.get("holdable"):
 			can_hold_looking = true
 			if Input.is_action_just_pressed("pickup"):
 				collider.on_hold(true)

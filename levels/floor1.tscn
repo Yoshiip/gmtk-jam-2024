@@ -1,23 +1,38 @@
-[gd_scene load_steps=33 format=3 uid="uid://1jtigxmmikbv"]
+[gd_scene load_steps=31 format=3 uid="uid://1jtigxmmikbv"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_et300"]
-[ext_resource type="Material" uid="uid://4lya3hw5tncv" path="res://assets/materials/floor/floor_tiles.tres" id="2_riec0"]
 [ext_resource type="PackedScene" uid="uid://ce6eunvs66mg0" path="res://assets/entities/clone/clone.tscn" id="3_41lut"]
-[ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="4_e6s4o"]
+[ext_resource type="Texture2D" uid="uid://bv771npiupuid" path="res://models/gridmap/wall.png" id="3_fwmnm"]
+[ext_resource type="Material" uid="uid://cnbvhajagbh3s" path="res://assets/materials/modular_floor/Floor.tres" id="5_370uu"]
 [ext_resource type="Texture2D" uid="uid://dhwmvrrpi24ay" path="res://assets/ui/crosshair001.png" id="5_c3brq"]
 [ext_resource type="Theme" uid="uid://c6orqmnww3tlp" path="res://theme.tres" id="6_r4xil"]
-[ext_resource type="PackedScene" uid="uid://cww5p8822myps" path="res://assets/entities/clone/path_follow/clone_path_follow.tscn" id="7_b7om1"]
 [ext_resource type="Texture2D" uid="uid://ew1qlups0njo" path="res://assets/ui/dialogue.png" id="7_qpdhr"]
 [ext_resource type="Script" path="res://assets/ui/pause.gd" id="8_1iooo"]
 [ext_resource type="PackedScene" uid="uid://bkyu4dfjxhn22" path="res://assets/ceiling_fan/ceiling_fan.tscn" id="8_75e2y"]
 [ext_resource type="PackedScene" uid="uid://bugloqmd3fyd4" path="res://assets/clock/clock.tscn" id="9_aoj7x"]
 [ext_resource type="Texture2D" uid="uid://bb5iemtk5xl8e" path="res://assets/ui/perspective.png" id="9_kq5rg"]
 [ext_resource type="Shader" path="res://levels/vignette.gdshader" id="10_gx5n5"]
-[ext_resource type="Script" path="res://assets/button/button.gd" id="11_6h7h2"]
 [ext_resource type="PackedScene" uid="uid://bgdkyy1upjj21" path="res://assets/world/cell/cell.tscn" id="11_tmfcj"]
 [ext_resource type="PackedScene" uid="uid://8uop1bhpw4yp" path="res://assets/props/rock/rock.tscn" id="12_jjgaa"]
-[ext_resource type="PackedScene" uid="uid://bcx7m0lb330sy" path="res://assets/camera/camera.tscn" id="13_x8jik"]
-[ext_resource type="PackedScene" uid="uid://bks783idhe1v4" path="res://assets/entities/turret/turret.tscn" id="14_w7glv"]
+[ext_resource type="PackedScene" uid="uid://dl8lpoqkiafbn" path="res://assets/world/elevator/elevator.tscn" id="19_27eyn"]
+[ext_resource type="ArrayMesh" uid="uid://d36fhs2me0pa3" path="res://models/gridmap/wall_2x2x2.res" id="21_wbp2a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b4wuf"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_p8xk4"]
+item/1/name = "Wall"
+item/1/mesh = ExtResource("21_wbp2a")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/shapes = [SubResource("BoxShape3D_b4wuf"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/1/preview = ExtResource("3_fwmnm")
+item/2/name = ""
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/shapes = []
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
 
 [sub_resource type="Environment" id="Environment_heanm"]
 background_mode = 1
@@ -30,9 +45,11 @@ fog_density = 0.05
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s7s7t"]
 shader = ExtResource("10_gx5n5")
-shader_parameter/vignette_intensity = 0.4
-shader_parameter/vignette_opacity = 0.2
-shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+shader_parameter/player_position = Vector2(0.5, 0.5)
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/MULTIPLIER = 1.0
+shader_parameter/SCALE = 1.0
+shader_parameter/SOFTNESS = 2.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgmdt"]
 texture = ExtResource("7_qpdhr")
@@ -82,25 +99,22 @@ expand_margin_top = 8.0
 expand_margin_right = 8.0
 expand_margin_bottom = 8.0
 
-[sub_resource type="Curve3D" id="Curve3D_gwktt"]
+[sub_resource type="Curve3D" id="Curve3D_c0lxc"]
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.71284, 0, 0.459867, 0, 0, 0, 0, 0, 0, -18.7147, 0, -1.81315, 0, 0, 0, 0, 0, 0, -18.4307, 0, 1.55565, 0, 0, 0, 0, 0, 0, 4.96652, 0, -1.85782, 0, 0, 0, 0, 0, 0, 5.23164, 0, 5.89707, 0, 0, 0, 0, 0, 0, -3.71284, 0, 0.459867),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -9, 0, -25, 0, 0, 0, 0, 0, 0, 3, 0, -25, 0, 0, 0, 0, 0, 0, 3, 0, -3),
+"tilts": PackedFloat32Array(0, 0, 0)
 }
-point_count = 6
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2gmg"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="MeshLibrary" id="MeshLibrary_p8xk4"]
-item/0/name = ""
-item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/shapes = []
-item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-item/0/navigation_layers = 1
+point_count = 3
 
 [node name="Floor1" type="Node3D"]
 script = ExtResource("1_et300")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = SubResource("MeshLibrary_p8xk4")
+data = {
+"cells": PackedInt32Array(65535, 65527, 1, 0, 65527, 1, 1, 65527, 1, 2, 5, 1, 3, 5, 1, 4, 5, 1, 65535, 65531, 1, 0, 65531, 1, 1, 65531, 1, 65522, 65530, 1, 65522, 65531, 1, 65522, 65532, 1, 65522, 65533, 1, 65526, 65530, 1, 65526, 65531, 1, 65526, 65532, 1, 65526, 65533, 1, 65522, 65527, 1, 65522, 65526, 1, 65522, 65525, 1, 65522, 65524, 1, 65523, 65524, 1, 65524, 65524, 1, 65525, 65524, 1, 65526, 65527, 1, 65526, 65526, 1, 65526, 65525, 1, 65526, 65524, 1, 65530, 65527, 1, 65530, 65526, 1, 65530, 65525, 1, 65530, 65524, 1, 65529, 65524, 1, 65528, 65524, 1, 65527, 65524, 1, 65534, 65527, 1, 65534, 65526, 1, 65534, 65525, 1, 65534, 65524, 1, 65533, 65524, 1, 65532, 65524, 1, 65531, 65524, 1, 131070, 65526, 1, 131070, 65525, 1, 131070, 65524, 1, 131069, 65524, 1, 131068, 65524, 1, 131067, 65524, 1, 131066, 65524, 1, 131066, 65525, 1, 131066, 65526, 1, 131066, 65527, 1, 131065, 65524, 1, 131064, 65524, 1, 131063, 65524, 1, 65523, 65533, 1, 65524, 65533, 1, 65525, 65533, 1, 65527, 65533, 1, 65528, 65533, 1, 65531, 65533, 1, 65532, 65533, 1, 65533, 65533, 1, 65534, 65533, 1, 65534, 65530, 1, 65534, 65531, 1, 65534, 65532, 1, 65530, 65530, 1, 131070, 65532, 1, 131070, 65533, 1, 131069, 65533, 1, 131068, 65533, 1, 131067, 65533, 1, 131066, 65533, 1, 131066, 65532, 1, 131066, 65531, 1, 131066, 65530, 1, 8, 0, 2, 8, 1, 2, 8, 3, 2, 5, 5, 1, 6, 5, 1, 7, 5, 1, 8, 5, 1, 9, 5, 1, 10, 5, 1, 11, 5, 1, 12, 5, 1, 11, 2, 1, 12, 2, 1, 13, 5, 1, 14, 5, 1, 15, 5, 1, 15, 4, 1, 15, 3, 1, 15, 2, 1, 14, 2, 1, 13, 2, 1, 11, 1, 1, 11, 0, 1, 7, 65533, 1, 7, 65532, 1, 7, 65531, 1, 7, 65530, 1, 7, 65528, 1, 7, 65529, 1, 7, 65527, 1, 11, 65535, 1, 11, 65534, 1, 11, 65533, 1, 11, 65532, 1, 11, 65531, 1, 11, 65530, 1, 11, 65529, 1, 11, 65528, 1, 7, 65526, 1, 7, 65525, 1, 7, 65524, 1, 7, 65523, 1, 7, 65522, 1, 7, 65521, 1, 6, 65521, 1, 5, 65521, 1, 4, 65521, 1, 3, 65521, 1, 2, 65521, 1, 1, 65521, 1, 0, 65521, 1, 65535, 65521, 1, 65534, 65521, 1, 65533, 65521, 1, 65530, 65521, 1, 65531, 65521, 1, 65532, 65521, 1, 65529, 65521, 1, 65528, 65521, 1, 65527, 65521, 1, 65526, 65521, 1, 65525, 65521, 1, 65524, 65521, 1, 65523, 65521, 1, 65522, 65521, 1, 65521, 65521, 1, 65520, 65521, 1, 65519, 65521, 1, 65519, 65522, 1, 65519, 65523, 1, 65519, 65524, 1, 65519, 65525, 1, 65519, 65526, 1, 65519, 65527, 1, 65519, 65528, 1, 65519, 65529, 1, 65519, 65530, 1, 65519, 65531, 1, 65519, 65532, 1, 65519, 65533, 1, 65519, 65534, 1, 65519, 65535, 1, 65519, 0, 1, 65519, 1, 1, 65519, 2, 1, 15, 7, 1, 14, 7, 1, 13, 7, 1, 12, 7, 1, 11, 7, 1, 10, 7, 1, 9, 7, 1, 8, 7, 1, 7, 7, 1, 6, 7, 1, 5, 7, 1, 4, 7, 1, 3, 7, 1, 2, 7, 1, 1, 7, 1, 0, 7, 1, 65535, 7, 1, 65534, 7, 1, 65533, 7, 1, 65532, 7, 1, 65531, 7, 1, 65530, 7, 1, 65529, 7, 1, 65528, 7, 1, 11, 65527, 1, 11, 65526, 1, 11, 65525, 1, 11, 65524, 1, 11, 65523, 1, 11, 65522, 1, 11, 65521, 1, 11, 65520, 1, 11, 65519, 1, 11, 65518, 1, 11, 65517, 1, 10, 65517, 1, 9, 65517, 1, 8, 65517, 1, 7, 65517, 1, 6, 65517, 1, 5, 65517, 1, 4, 65517, 1, 3, 65517, 1, 2, 65517, 1, 1, 65517, 1, 0, 65517, 1, 65535, 65517, 1, 65534, 65517, 1, 65533, 65517, 1, 65532, 65517, 1, 65531, 65517, 1, 65530, 65517, 1, 65529, 65517, 1, 65528, 65517, 1, 65527, 65517, 1, 65526, 65517, 1, 65525, 65517, 1, 65524, 65517, 1, 65523, 65517, 1, 65522, 65517, 1, 65521, 65517, 1, 65520, 65517, 1, 65519, 65517, 1, 65518, 65517, 1, 65517, 65517, 1, 65516, 65517, 1, 65515, 65517, 1, 65514, 65517, 1, 65514, 65518, 1, 65514, 65519, 1, 65514, 65520, 1, 65514, 65521, 1, 65514, 65522, 1, 65514, 65523, 1, 65514, 65524, 1, 65514, 65525, 1, 65514, 65526, 1, 65514, 65527, 1, 65514, 65528, 1, 65514, 65529, 1, 65514, 65530, 1, 65514, 65531, 1, 65514, 65532, 1, 65514, 65533, 1, 65514, 65534, 1, 65514, 65535, 1, 65514, 0, 1, 65514, 1, 1, 65514, 2, 1, 65514, 3, 1, 65514, 4, 1, 65514, 5, 1, 65514, 6, 1, 65514, 7, 1, 65514, 8, 1, 65514, 9, 1, 65514, 10, 1, 65514, 11, 1, 65527, 7, 1, 65526, 7, 1, 65525, 7, 1, 65524, 7, 1, 65523, 7, 1, 65522, 7, 1, 65521, 7, 1, 65520, 7, 1, 65519, 7, 1, 65519, 6, 1, 65519, 5, 1, 65519, 4, 1, 65519, 3, 1, 65514, 12, 1, 65515, 12, 1, 65516, 12, 1, 65517, 12, 1, 65518, 12, 1, 65519, 12, 1, 65520, 12, 1, 65521, 12, 1, 65522, 12, 1, 65523, 12, 1, 65524, 12, 1, 65525, 12, 1, 65526, 12, 1, 65527, 12, 1, 65528, 12, 1, 65529, 12, 1, 65530, 12, 1, 65531, 12, 1, 65532, 12, 1, 65533, 12, 1, 65534, 12, 1, 65535, 12, 1, 0, 12, 1, 1, 12, 1, 2, 12, 1, 3, 12, 1, 4, 12, 1, 5, 12, 1, 6, 12, 1, 7, 12, 1, 8, 12, 1, 9, 12, 1, 10, 12, 1, 11, 12, 1, 12, 12, 1, 13, 12, 1, 14, 12, 1, 15, 12, 1, 15, 11, 1, 15, 10, 1, 15, 9, 1, 15, 8, 1, 4, 65524, 1, 3, 65524, 1, 2, 65524, 1, 5, 65524, 1, 6, 65524, 1, 6, 65533, 1, 2, 65533, 1, 2, 65534, 1, 2, 65535, 1, 2, 0, 1, 2, 1, 1, 2, 2, 1, 2, 3, 1, 2, 4, 1, 7, 65534, 1, 7, 65535, 1, 7, 0, 1, 7, 1, 1, 7, 2, 1, 2, 65531, 1, 2, 65532, 1, 2, 65527, 1, 2, 65526, 1, 2, 65525, 1, 65521, 65527, 1, 65520, 65527, 1, 65520, 4, 1, 65521, 4, 1, 65522, 4, 1, 65523, 4, 1, 65524, 4, 1, 65525, 4, 1, 65526, 4, 1, 65526, 3, 1, 65526, 2, 1, 65526, 1, 1, 65526, 0, 1, 65526, 65535, 1, 65526, 65534, 1, 65528, 65534, 1, 65528, 65535, 1, 65528, 0, 1, 65528, 1, 1, 65529, 1, 1, 65530, 1, 1, 65531, 1, 1, 65532, 1, 1, 65533, 1, 1, 65533, 0, 1, 65533, 65535, 1, 65533, 65534, 1, 65530, 65533, 1, 65530, 65531, 1, 65530, 65532, 1, 131064, 65533, 1, 131063, 65533, 1, 131062, 65533, 1, 131062, 65532, 1, 131062, 65531, 1, 131062, 65530, 1, 131061, 65533, 1, 131060, 65533, 1, 131059, 65533, 1, 131058, 65533, 1, 131058, 65532, 1, 131058, 65531, 1, 131058, 65530, 1)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_heanm")
@@ -117,18 +131,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.316, 0, -13.1943)
 
 [node name="Floor" type="CSGBox3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-material_override = ExtResource("2_riec0")
+material_override = ExtResource("5_370uu")
 use_collision = true
 collision_layer = 5
 collision_mask = 5
-size = Vector3(64, 2, 64)
+size = Vector3(1024, 2, 1024)
 
 [node name="Props" type="Node3D" parent="."]
 
 [node name="Clones" type="Node3D" parent="."]
 
 [node name="Clone" parent="Clones" instance=ExtResource("3_41lut")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 11)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, -14)
+moving = true
 path_id = &"0"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -377,40 +392,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 8)
 
 [node name="0" type="Path3D" parent="Paths"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 11)
-curve = SubResource("Curve3D_gwktt")
-
-[node name="ClonePathFollow" parent="Paths/0" instance=ExtResource("7_b7om1")]
-transform = Transform3D(0.149806, 0, 0.988716, 0, 1, 0, -0.988716, 0, 0.149806, -3.71284, 0, 0.459867)
-rotation_mode = 4
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 12)
-shadow_enabled = true
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 22)
-shadow_enabled = true
-
-[node name="Button" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 6)
-script = ExtResource("11_6h7h2")
-
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Button"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
-radius = 1.0
-height = 0.2
-material = SubResource("StandardMaterial3D_l2gmg")
-
-[node name="StaticBody3D" type="AnimatableBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3779, 0, 9.34533)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-
-[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
-size = Vector3(3, 4, 0.25)
-
-[node name="Rock" parent="." instance=ExtResource("12_jjgaa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -15)
+curve = SubResource("Curve3D_c0lxc")
 
 [node name="Cells" type="Node3D" parent="."]
 
@@ -432,19 +414,12 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0
 [node name="Cell6" parent="Cells" instance=ExtResource("11_tmfcj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -23, 0, -19)
 
-[node name="Camera" parent="." instance=ExtResource("13_x8jik")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.731, 3, -11)
+[node name="Elevator" parent="." instance=ExtResource("19_27eyn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.2205, 2, 11.621)
 
-[node name="Turret" parent="." instance=ExtResource("14_w7glv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06494, 0, -14.1941)
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.2, 4)
+size = Vector3(3, 0.5, 2)
 
-[node name="Clock" parent="." instance=ExtResource("9_aoj7x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8045, 1.27038, -17)
-
-[node name="Crate" parent="." instance=ExtResource("4_e6s4o")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2409, -2.38419e-07, -13.9175)
-
-[node name="GridMap" type="GridMap" parent="."]
-mesh_library = SubResource("MeshLibrary_p8xk4")
-
-[connection signal="body_entered" from="Button" to="Button" method="_on_body_entered"]
+[node name="Rock" parent="." instance=ExtResource("12_jjgaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 1, -14)

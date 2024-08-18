@@ -1,7 +1,7 @@
 @tool
 extends Area3D
 
-const BAR = preload("res://assets/prison_bars/bar.tscn")
+const BAR = preload("res://assets/world/cell/prison_bars/bar.tscn")
 
 const SPACING := 0.65
 

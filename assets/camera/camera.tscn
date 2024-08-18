@@ -1,19 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bcx7m0lb330sy"]
 
 [ext_resource type="Script" path="res://assets/camera/camera.gd" id="1_y7sro"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_lsn6b"]
-size = Vector3(0.2, 0.2, 0.4)
+[ext_resource type="PackedScene" uid="uid://dubjgpxlti780" path="res://models/camera/Camera.blend" id="2_xfn0m"]
 
 [node name="Camera" type="Marker3D"]
 script = ExtResource("1_y7sro")
 
 [node name="Area" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area"]
-mesh = SubResource("BoxMesh_lsn6b")
-skeleton = NodePath("../..")
 
 [node name="CollisionShape3D2" type="CollisionPolygon3D" parent="Area"]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
@@ -30,5 +24,10 @@ spot_range = 10.0
 transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.0434812, -0.627698)
 target_position = Vector3(0, 0, -20)
 
+[node name="Mesh" parent="Area" instance=ExtResource("2_xfn0m")]
+transform = Transform3D(-0.26, 0, 3.92589e-08, -3.41824e-09, 0.259013, -0.022638, -3.91098e-08, -0.022638, -0.259013, 0, 0, 0)
+
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
+
+[editable path="Area/Mesh"]
