@@ -1,0 +1,2 @@
+class_name ClonePathFollow
+extends PathFollow3D

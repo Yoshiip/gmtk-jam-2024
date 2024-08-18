@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cccx1at3b2nls"]
+
+[ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_if0wq"]
+[ext_resource type="PackedScene" uid="uid://blxpvc6uugngm" path="res://assets/entities/player/view_model_camera.tscn" id="2_no31q"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_58omm"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oekmp"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpc2o"]
+albedo_color = Color(0.219608, 1, 1, 1)
+
+[node name="Player" type="CharacterBody3D" groups=["Player"]]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_if0wq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_58omm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_oekmp")
+surface_material_override/0 = SubResource("StandardMaterial3D_rpc2o")
+
+[node name="Head" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="Camera" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+current = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head/Camera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Head/Camera/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="ViewModelCamera" parent="Head/Camera/SubViewportContainer/SubViewport" instance=ExtResource("2_no31q")]
+cull_mask = 1048574
+current = true
+
+[node name="MainRay" type="RayCast3D" parent="Head/Camera"]
+target_position = Vector3(0, 0, -4)
+collision_mask = 2
+collide_with_areas = true

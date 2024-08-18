@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://4yt6vnfx5hsm"]
+
+[ext_resource type="Texture2D" uid="uid://dxhox5fjoun6i" path="res://assets/particles/star.png" id="1_cg0bw"]
+[ext_resource type="Script" path="res://assets/entities/clone/dead_particles/clone_dead_particles.gd" id="2_el2oi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nojjv"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_cg0bw")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_xuqxm"]
+_data = [Vector2(0.428571, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.59932, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_do4bj"]
+curve = SubResource("Curve_xuqxm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ngen5"]
+lifetime_randomness = 0.1
+emission_shape_offset = Vector3(0, 0.75, 0)
+emission_shape_scale = Vector3(0.4, 2, 0.4)
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 20.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.6
+scale_max = 1.4
+color = Color(0.290196, 0.52549, 0.756863, 0.529412)
+alpha_curve = SubResource("CurveTexture_do4bj")
+collision_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_5pd22"]
+
+[node name="CloneDeadParticles" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_nojjv")
+emitting = false
+amount = 40
+one_shot = true
+explosiveness = 0.75
+fixed_fps = 0
+draw_order = 3
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_ngen5")
+draw_pass_1 = SubResource("QuadMesh_5pd22")
+script = ExtResource("2_el2oi")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

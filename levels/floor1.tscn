@@ -1,0 +1,450 @@
+[gd_scene load_steps=33 format=3 uid="uid://1jtigxmmikbv"]
+
+[ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_et300"]
+[ext_resource type="Material" uid="uid://4lya3hw5tncv" path="res://assets/materials/floor/floor_tiles.tres" id="2_riec0"]
+[ext_resource type="PackedScene" uid="uid://ce6eunvs66mg0" path="res://assets/entities/clone/clone.tscn" id="3_41lut"]
+[ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="4_e6s4o"]
+[ext_resource type="Texture2D" uid="uid://dhwmvrrpi24ay" path="res://assets/ui/crosshair001.png" id="5_c3brq"]
+[ext_resource type="Theme" uid="uid://c6orqmnww3tlp" path="res://theme.tres" id="6_r4xil"]
+[ext_resource type="PackedScene" uid="uid://cww5p8822myps" path="res://assets/entities/clone/path_follow/clone_path_follow.tscn" id="7_b7om1"]
+[ext_resource type="Texture2D" uid="uid://ew1qlups0njo" path="res://assets/ui/dialogue.png" id="7_qpdhr"]
+[ext_resource type="Script" path="res://assets/ui/pause.gd" id="8_1iooo"]
+[ext_resource type="PackedScene" uid="uid://bkyu4dfjxhn22" path="res://assets/ceiling_fan/ceiling_fan.tscn" id="8_75e2y"]
+[ext_resource type="PackedScene" uid="uid://bugloqmd3fyd4" path="res://assets/clock/clock.tscn" id="9_aoj7x"]
+[ext_resource type="Texture2D" uid="uid://bb5iemtk5xl8e" path="res://assets/ui/perspective.png" id="9_kq5rg"]
+[ext_resource type="Shader" path="res://levels/vignette.gdshader" id="10_gx5n5"]
+[ext_resource type="Script" path="res://assets/button/button.gd" id="11_6h7h2"]
+[ext_resource type="PackedScene" uid="uid://bgdkyy1upjj21" path="res://assets/world/cell/cell.tscn" id="11_tmfcj"]
+[ext_resource type="PackedScene" uid="uid://8uop1bhpw4yp" path="res://assets/props/rock/rock.tscn" id="12_jjgaa"]
+[ext_resource type="PackedScene" uid="uid://bcx7m0lb330sy" path="res://assets/camera/camera.tscn" id="13_x8jik"]
+[ext_resource type="PackedScene" uid="uid://bks783idhe1v4" path="res://assets/entities/turret/turret.tscn" id="14_w7glv"]
+
+[sub_resource type="Environment" id="Environment_heanm"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.6
+glow_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s7s7t"]
+shader = ExtResource("10_gx5n5")
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.2
+shader_parameter/vignette_rgb = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lgmdt"]
+texture = ExtResource("7_qpdhr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2k2bd"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+texture = ExtResource("9_kq5rg")
+modulate_color = Color(0.607843, 1, 1, 0.498039)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_74d6x"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+texture = ExtResource("9_kq5rg")
+modulate_color = Color(0.607843, 0.627451, 1, 0.498039)
+
+[sub_resource type="Gradient" id="Gradient_ggte3"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.498039)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uqehj"]
+gradient = SubResource("Gradient_ggte3")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ceu7j"]
+texture = SubResource("GradientTexture2D_uqehj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m07qc"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ireg4"]
+bg_color = Color(1, 1, 1, 1)
+expand_margin_left = 8.0
+expand_margin_right = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5awar"]
+bg_color = Color(0.999577, 0.35882, 0, 1)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="Curve3D" id="Curve3D_gwktt"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.71284, 0, 0.459867, 0, 0, 0, 0, 0, 0, -18.7147, 0, -1.81315, 0, 0, 0, 0, 0, 0, -18.4307, 0, 1.55565, 0, 0, 0, 0, 0, 0, 4.96652, 0, -1.85782, 0, 0, 0, 0, 0, 0, 5.23164, 0, 5.89707, 0, 0, 0, 0, 0, 0, -3.71284, 0, 0.459867),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2gmg"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_p8xk4"]
+item/0/name = ""
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/shapes = []
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+
+[node name="Floor1" type="Node3D"]
+script = ExtResource("1_et300")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_heanm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+sky_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="CeilingFan" parent="." instance=ExtResource("8_75e2y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.316, 0, -13.1943)
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+material_override = ExtResource("2_riec0")
+use_collision = true
+collision_layer = 5
+collision_mask = 5
+size = Vector3(64, 2, 64)
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Clones" type="Node3D" parent="."]
+
+[node name="Clone" parent="Clones" instance=ExtResource("3_41lut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 11)
+path_id = &"0"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Container" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_r4xil")
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer/Container"]
+material = SubResource("ShaderMaterial_s7s7t")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_c3brq")
+metadata/_edit_lock_ = true
+
+[node name="Detection" type="VBoxContainer" parent="CanvasLayer/Container"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 211.0
+offset_bottom = 70.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Container/Detection"]
+layout_mode = 2
+text = "DETECTION"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Container/Detection"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="Transition" type="ColorRect" parent="CanvasLayer/Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Paused" type="Label" parent="CanvasLayer/Container"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -31.0
+offset_right = 70.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "PAUSED"
+script = ExtResource("8_1iooo")
+
+[node name="Dialogue" type="Panel" parent="CanvasLayer/Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -141.0
+offset_top = -113.0
+offset_right = 141.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_lgmdt")
+
+[node name="Author" type="RichTextLabel" parent="CanvasLayer/Container/Dialogue"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[center][wave]You[/wave][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Message" type="Label" parent="CanvasLayer/Container/Dialogue"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -88.0
+offset_right = 110.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "It's too heavy, i can't hold it!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -121.0
+offset_top = 32.0
+offset_right = 121.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Scale" type="Label" parent="CanvasLayer/Container/Actions"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_2k2bd")
+text = "Scale"
+
+[node name="Hold" type="Label" parent="CanvasLayer/Container/Actions"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_74d6x")
+text = "Hold"
+
+[node name="PauseMenu" type="Panel" parent="CanvasLayer/Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ceu7j")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Container/PauseMenu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = -220.0
+offset_right = 804.0
+offset_bottom = -64.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Container/PauseMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Game is paused"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Container/PauseMenu/VBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="Button" type="Button" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+text = "Resume"
+
+[node name="Button2" type="Button" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+text = "Reset Floor"
+
+[node name="Button3" type="Button" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+text = "Settings"
+
+[node name="Button4" type="Button" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Button5" type="Button" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+text = "Quit Game"
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+
+[node name="VSlider" type="VSlider" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer/Panel"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_m07qc")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_ireg4")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_5awar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer/Panel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 89.0
+offset_bottom = 97.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "volume"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Container/PauseMenu/VBoxContainer/GridContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="Clock" parent="CanvasLayer" instance=ExtResource("9_aoj7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 8)
+
+[node name="Paths" type="Node3D" parent="."]
+
+[node name="0" type="Path3D" parent="Paths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 11)
+curve = SubResource("Curve3D_gwktt")
+
+[node name="ClonePathFollow" parent="Paths/0" instance=ExtResource("7_b7om1")]
+transform = Transform3D(0.149806, 0, 0.988716, 0, 1, 0, -0.988716, 0, 0.149806, -3.71284, 0, 0.459867)
+rotation_mode = 4
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 12)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 22)
+shadow_enabled = true
+
+[node name="Button" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 6)
+script = ExtResource("11_6h7h2")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 1.0
+height = 0.2
+material = SubResource("StandardMaterial3D_l2gmg")
+
+[node name="StaticBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3779, 0, 9.34533)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(3, 4, 0.25)
+
+[node name="Rock" parent="." instance=ExtResource("12_jjgaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -15)
+
+[node name="Cells" type="Node3D" parent="."]
+
+[node name="Cell" parent="Cells" instance=ExtResource("11_tmfcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, -9)
+
+[node name="Cell2" parent="Cells" instance=ExtResource("11_tmfcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -9)
+
+[node name="Cell3" parent="Cells" instance=ExtResource("11_tmfcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+
+[node name="Cell4" parent="Cells" instance=ExtResource("11_tmfcj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7, 0, -19)
+
+[node name="Cell5" parent="Cells" instance=ExtResource("11_tmfcj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, -19)
+
+[node name="Cell6" parent="Cells" instance=ExtResource("11_tmfcj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -23, 0, -19)
+
+[node name="Camera" parent="." instance=ExtResource("13_x8jik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.731, 3, -11)
+
+[node name="Turret" parent="." instance=ExtResource("14_w7glv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.06494, 0, -14.1941)
+
+[node name="Clock" parent="." instance=ExtResource("9_aoj7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.8045, 1.27038, -17)
+
+[node name="Crate" parent="." instance=ExtResource("4_e6s4o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2409, -2.38419e-07, -13.9175)
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = SubResource("MeshLibrary_p8xk4")
+
+[connection signal="body_entered" from="Button" to="Button" method="_on_body_entered"]

@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ddljjt6mdagob"]
+
+[ext_resource type="Shader" path="res://assets/entities/clone/clone.gdshader" id="1_iahij"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_iahij")
+shader_parameter/outline_color = null
+shader_parameter/outline_width = 2.0
+shader_parameter/constant_width = true

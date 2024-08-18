@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dovqb38vmkoj6"]
+
+[ext_resource type="Script" path="res://assets/entities/turret/projectile/projectile.gd" id="1_8760e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fftgu"]
+albedo_color = Color(1, 0.603922, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.603922, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d3ob7"]
+size = Vector3(0.04, 0.04, 0.24)
+
+[node name="Projectile" type="Area3D"]
+script = ExtResource("1_8760e")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.04, 0.04, 0.24)
+material = SubResource("StandardMaterial3D_fftgu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_d3ob7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

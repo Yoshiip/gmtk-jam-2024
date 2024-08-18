@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c6orqmnww3tlp"]
+
+[ext_resource type="FontFile" uid="uid://c0ttvgvth4rp0" path="res://assets/ui/fonts/FuturaCyrillicMedium.ttf" id="1_oe2bd"]
+
+[resource]
+default_font = ExtResource("1_oe2bd")
+default_font_size = 24
+Label/colors/font_shadow_color = Color(0.31802, 0.31802, 0.31802, 1)
+Label/constants/outline_size = 4
+Label/constants/shadow_offset_x = 2
+Label/constants/shadow_offset_y = 2

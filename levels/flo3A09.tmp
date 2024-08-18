@@ -1,0 +1,194 @@
+[gd_scene load_steps=14 format=3 uid="uid://1jtigxmmikbv"]
+
+[ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_et300"]
+[ext_resource type="PackedScene" uid="uid://ce6eunvs66mg0" path="res://assets/clone/clone.tscn" id="3_41lut"]
+[ext_resource type="Texture2D" uid="uid://dhwmvrrpi24ay" path="res://assets/ui/crosshair001.png" id="5_c3brq"]
+[ext_resource type="Theme" uid="uid://c6orqmnww3tlp" path="res://theme.tres" id="6_r4xil"]
+[ext_resource type="PackedScene" uid="uid://cww5p8822myps" path="res://assets/clone/path_follow/clone_path_follow.tscn" id="7_b7om1"]
+[ext_resource type="Script" path="res://assets/ui/pause.gd" id="8_1iooo"]
+[ext_resource type="PackedScene" uid="uid://bugloqmd3fyd4" path="res://assets/clock/clock.tscn" id="9_aoj7x"]
+[ext_resource type="Script" path="res://assets/button/button.gd" id="11_6h7h2"]
+[ext_resource type="PackedScene" uid="uid://bgdkyy1upjj21" path="res://assets/cell/cell.tscn" id="11_tmfcj"]
+[ext_resource type="PackedScene" uid="uid://8uop1bhpw4yp" path="res://assets/rock/rock.tscn" id="12_jjgaa"]
+
+[sub_resource type="Environment" id="Environment_heanm"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.6
+glow_enabled = true
+fog_density = 0.05
+
+[sub_resource type="Curve3D" id="Curve3D_gwktt"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.71284, 0, 0.459867, 0, 0, 0, 0, 0, 0, -18.7147, 0, -1.81315, 0, 0, 0, 0, 0, 0, -18.4307, 0, 1.55565, 0, 0, 0, 0, 0, 0, 4.96652, 0, -1.85782, 0, 0, 0, 0, 0, 0, 5.23164, 0, 5.89707, 0, 0, 0, 0, 0, 0, -3.71284, 0, 0.459867),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l2gmg"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="Floor1" type="Node3D"]
+script = ExtResource("1_et300")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_heanm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+sky_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+use_collision = true
+size = Vector3(64, 2, 64)
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Clones" type="Node3D" parent="."]
+
+[node name="Clone" parent="Clones" instance=ExtResource("3_41lut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 11)
+path_id = &"0"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Container" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("6_r4xil")
+
+[node name="Crosshair" type="TextureRect" parent="CanvasLayer/Container"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_c3brq")
+metadata/_edit_lock_ = true
+
+[node name="Detection" type="VBoxContainer" parent="CanvasLayer/Container"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 211.0
+offset_bottom = 70.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Container/Detection"]
+layout_mode = 2
+text = "DETECTION"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Container/Detection"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="Transition" type="ColorRect" parent="CanvasLayer/Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Paused" type="Label" parent="CanvasLayer/Container"]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -31.0
+offset_right = 70.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "PAUSED"
+script = ExtResource("8_1iooo")
+
+[node name="Clock" parent="CanvasLayer" instance=ExtResource("9_aoj7x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 8)
+
+[node name="Paths" type="Node3D" parent="."]
+
+[node name="0" type="Path3D" parent="Paths"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 11)
+curve = SubResource("Curve3D_gwktt")
+
+[node name="ClonePathFollow" parent="Paths/0" instance=ExtResource("7_b7om1")]
+transform = Transform3D(0.149806, 0, 0.988716, 0, 1, 0, -0.988716, 0, 0.149806, -3.71284, 0, 0.459867)
+rotation_mode = 4
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 12)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, 22)
+shadow_enabled = true
+
+[node name="Button" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 0, 6)
+script = ExtResource("11_6h7h2")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 1.0
+height = 0.2
+material = SubResource("StandardMaterial3D_l2gmg")
+
+[node name="StaticBody3D" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3779, 0, 9.34533)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+size = Vector3(3, 4, 0.25)
+
+[node name="Rock" parent="." instance=ExtResource("12_jjgaa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 14)
+
+[node name="Cells" type="Node3D" parent="."]
+
+[node name="Cell" parent="." instance=ExtResource("11_tmfcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, -9)
+
+[node name="Cell2" parent="." instance=ExtResource("11_tmfcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -9)
+
+[node name="Cell3" parent="." instance=ExtResource("11_tmfcj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -9)
+
+[node name="Cell4" parent="." instance=ExtResource("11_tmfcj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7, 0, -19)
+
+[node name="Cell5" parent="." instance=ExtResource("11_tmfcj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, 0, -19)
+
+[node name="Cell6" parent="." instance=ExtResource("11_tmfcj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -23, 0, -19)
+
+[node name="Cells2" type="Node3D" parent="."]
+
+[connection signal="body_entered" from="Button" to="Button" method="_on_body_entered"]
