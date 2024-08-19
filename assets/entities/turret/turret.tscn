@@ -235,8 +235,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_h8cpn")
 
-[node name="Turret" type="StaticBody3D"]
+[node name="Turret" type="RigidBody3D"]
+collision_layer = 3
+freeze = true
 script = ExtResource("1_wlbeb")
+base_mass = 100.0
+scales = Array[float]([0.75, 1.0, 1.5])
+current_scale = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

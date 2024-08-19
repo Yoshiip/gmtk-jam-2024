@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends Prop
 
 const BASE_FIRE_SPEED := 0.175
 
@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 		shoot_raycast.look_at(player.position)
 		if shoot_raycast.is_colliding() && player.global_position.distance_to(global_position) < 50:
 			var collider := shoot_raycast.get_collider()
-			if collider.is_in_group("Destroyable") || collider.name == "Player":
+			if is_instance_valid(collider) && (collider.is_in_group("Destroyable") || collider.name == "Player"):
 				if !inside:
 					inside = true
 					loading = 1.0

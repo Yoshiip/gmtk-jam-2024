@@ -31,8 +31,15 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={}
-blender/nodes/visible=0
+_subresources={
+"materials": {
+"Glass": {
+"use_external/enabled": true,
+"use_external/path": "res://models/Soldier/Glass.tres"
+}
+}
+}
+blender/nodes/visible=1
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true
 blender/nodes/cameras=true
@@ -43,7 +50,7 @@ blender/meshes/uvs=true
 blender/meshes/normals=true
 blender/meshes/tangents=true
 blender/meshes/skins=2
-blender/meshes/export_bones_deforming_mesh_only=false
+blender/meshes/export_bones_deforming_mesh_only=true
 blender/materials/unpack_enabled=true
 blender/materials/export_materials=1
 blender/animation/limit_playback=true

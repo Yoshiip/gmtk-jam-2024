@@ -1,7 +1,10 @@
 class_name GameRoot
 extends Node3D
 
-
+@export var available_modes: Array[String] = [
+	"objects"
+]
+@export var is_infiltration := false
 @export var level_id := 0
 
 const CANVAS_LAYER = preload("res://islands/canvas_layer.tscn")
@@ -27,7 +30,10 @@ func _add_player() -> void:
 const LEVELS_COMMON = preload("res://assets/levels_common.tscn")
 
 func _ready() -> void:
-	
+	if is_infiltration:
+		MusicManager.play(MusicManager.Musics.INFILTRATION)
+	else:
+		MusicManager.play(MusicManager.Musics.PUZZLE)
 	_add_player()
 	
 	canvas_layer = CANVAS_LAYER.instantiate()

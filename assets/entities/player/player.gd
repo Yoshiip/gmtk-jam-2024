@@ -19,7 +19,6 @@ var t_bob = 0.0
 
 
 const BASE_GUN_COOLDOWN := 0.25
-var gun_cooldown := 0.0
 var footstep_timer := 0.25
 
 var holded: Prop
@@ -60,27 +59,37 @@ func _handle_interact() -> void:
 			if Input.is_action_just_pressed("interact"):
 				collider.on_interact()
 		elif is_instance_valid(collider) && collider.get("holdable"):
-			print("!!!")
 			if collider.global_position.distance_to(self.position) < 3:
 				can_hold_looking = true
 				if Input.is_action_just_pressed("interact"):
 					collider.on_hold(true)
 					holded = collider
-
-	can_scale_looking = false
-	if main_ray.is_colliding():
-		var collider := main_ray.get_collider()
-		if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
-			can_scale_looking = true
-			if Input.is_action_pressed("scale") && gun_cooldown <= 0.0:
-				collider.on_scale(scale_gun.option == "+")
-				trauma = 0.125
-				gun_cooldown = BASE_GUN_COOLDOWN
-				scale_gun.shoot_animation()
-
+		
+		
+	if scale_gun.mode == GUN_MODE_SCALE:
+		can_scale_looking = false
+		if main_ray.is_colliding():
+			var collider := main_ray.get_collider()
+			if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
+				can_scale_looking = true
+				if Input.is_action_pressed("shoot") && scale_gun.can_shoot():
+					collider.on_scale(scale_gun.option == "+")
+					trauma = 0.125
+					scale_gun.shooted()
+	elif scale_gun.mode == GUN_MODE_TIME:
+		if Input.is_action_pressed("shoot") && scale_gun.can_shoot():
+			if scale_gun.option == "+":
+				root.speed_up_game()
+			else:
+				root.slow_down_game()
+			scale_gun.shooted()
+	else:
+		pass
+const GUN_MODE_SCALE := 0
+const GUN_MODE_TIME := 1
+const GUN_MODE_SELF := 2
 
 func _process(delta: float) -> void:
-	gun_cooldown -= delta
 	trauma *= 0.75
 	$Head/Camera.h_offset = randf_range(-trauma, trauma)
 	$Head/Camera.v_offset = randf_range(-trauma, trauma)
