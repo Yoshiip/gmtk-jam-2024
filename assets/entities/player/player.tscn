@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cccx1at3b2nls"]
+[gd_scene load_steps=7 format=3 uid="uid://cccx1at3b2nls"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_if0wq"]
 [ext_resource type="PackedScene" uid="uid://blxpvc6uugngm" path="res://assets/entities/player/view_model_camera.tscn" id="2_no31q"]
+[ext_resource type="AudioStream" uid="uid://qjbvlie68aqb" path="res://assets/entities/player/sfx/player-walk 15.wav" id="3_o52ys"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_58omm"]
 radius = 0.4
@@ -34,6 +35,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 
 [node name="Camera" type="Camera3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.35)
+cull_mask = 1048573
 current = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Head/Camera"]
@@ -55,6 +57,12 @@ cull_mask = 1048574
 current = true
 
 [node name="MainRay" type="RayCast3D" parent="Head/Camera"]
-target_position = Vector3(0, 0, -8)
+target_position = Vector3(0, 0, -30)
 collision_mask = 10
 collide_with_areas = true
+
+[node name="Footstep" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_o52ys")
+volume_db = 12.0
+
+[editable path="Head/Camera/SubViewportContainer/SubViewport/ViewModelCamera"]

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://j66jiu4yuah8"]
+
+[ext_resource type="Script" path="res://islands/exit.gd" id="1_yon24"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ev36p"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3m5c"]
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 4.0
+
+[node name="Exit" type="Node3D"]
+script = ExtResource("1_yon24")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_ev36p")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+radius = 1.0
+height = 0.25
+material = SubResource("StandardMaterial3D_m3m5c")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

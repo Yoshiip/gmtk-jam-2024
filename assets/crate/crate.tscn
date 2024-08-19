@@ -6,16 +6,22 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_js8j3"]
 size = Vector3(2, 2, 2)
 
-[node name="Crate" type="RigidBody3D"]
+[node name="Crate" type="RigidBody3D" groups=["Destroyable"]]
 collision_layer = 3
-mass = 8.0
+collision_mask = 3
+input_ray_pickable = false
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+contact_monitor = true
+max_contacts_reported = 10
 script = ExtResource("1_hdebo")
-scales = Array[float]([0.4, 1.0, 1.5, 2.0])
+base_mass = 25.0
+scales = Array[float]([0.4, 0.65, 1.2, 1.8])
 current_scale = 1
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_js8j3")
 
-[node name="Crate" parent="." instance=ExtResource("2_oo3vb")]
+[node name="Mesh" parent="." instance=ExtResource("2_oo3vb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

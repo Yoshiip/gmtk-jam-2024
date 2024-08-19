@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+
+@export var mass := 20.0
 var can_hold_looking := false
 var can_scale_looking := false
 
@@ -15,20 +17,22 @@ const BOB_FREQ = 2.4
 const BOB_AMP = 0.06
 var t_bob = 0.0
 
-var scale_mode_up := true
 
 const BASE_GUN_COOLDOWN := 0.25
 var gun_cooldown := 0.0
+var footstep_timer := 0.25
 
-var holded: Node3D
+var holded: Prop
 
 @onready var root: GameRoot = get_tree().current_scene
 @onready var head: Marker3D = $Head
 @onready var camera: Camera3D = $Head/Camera
-@onready var sub_viewport: SubViewport = $Head/Camera/SubViewportContainer/SubViewport
-@onready var view_model_camera: Camera3D = $Head/Camera/SubViewportContainer/SubViewport/ViewModelCamera
-@onready var main_ray: RayCast3D = $Head/Camera/MainRay
-@onready var scale_mode: Label3D = view_model_camera.get_node("FPSRig/ScaleDevice/Mesh/ScaleMode")
+@onready var main_ray: RayCast3D = camera.get_node("MainRay")
+
+@onready var sub_viewport: SubViewport = camera.get_node("SubViewportContainer/SubViewport")
+@onready var view_model_camera: Camera3D = sub_viewport.get_node("ViewModelCamera")
+
+@onready var scale_gun: ScaleGun = view_model_camera.get_node("FPSRig/ScaleGun")
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -43,17 +47,11 @@ func _unhandled_input(event: InputEvent) -> void:
 const SCALABLE_FLAG := 2
 var trauma := 0.0
 
-func _handle_scale_device() -> void:
-	if Input.is_action_just_pressed("switch_mode"):
-		scale_mode_up = !scale_mode_up
-		scale_mode.text = "+" if scale_mode_up else "-"
-
-
 func _handle_interact() -> void:
 	can_hold_looking = false
 	if holded:
 		if Input.is_action_just_pressed("interact"):
-			holded.on_hold(false)
+			holded.on_hold(false, camera.rotation.x > -0.5)
 			holded = null
 	elif main_ray.is_colliding():
 		var collider := main_ray.get_collider()
@@ -62,33 +60,42 @@ func _handle_interact() -> void:
 			if Input.is_action_just_pressed("interact"):
 				collider.on_interact()
 		elif is_instance_valid(collider) && collider.get("holdable"):
-			can_hold_looking = true
-			if Input.is_action_just_pressed("interact"):
-				collider.on_hold(true)
-				holded = collider
+			print("!!!")
+			if collider.global_position.distance_to(self.position) < 3:
+				can_hold_looking = true
+				if Input.is_action_just_pressed("interact"):
+					collider.on_hold(true)
+					holded = collider
+
 	can_scale_looking = false
-	
 	if main_ray.is_colliding():
 		var collider := main_ray.get_collider()
 		if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
 			can_scale_looking = true
 			if Input.is_action_pressed("scale") && gun_cooldown <= 0.0:
-				collider.on_scale(scale_mode_up)
-				trauma = 0.2
+				collider.on_scale(scale_gun.option == "+")
+				trauma = 0.125
 				gun_cooldown = BASE_GUN_COOLDOWN
+				scale_gun.shoot_animation()
 
 
 func _process(delta: float) -> void:
 	gun_cooldown -= delta
-	trauma *= 0.8
+	trauma *= 0.75
 	$Head/Camera.h_offset = randf_range(-trauma, trauma)
 	$Head/Camera.v_offset = randf_range(-trauma, trauma)
 	view_model_camera.h_offset = randf_range(-trauma, trauma)
 	view_model_camera.v_offset = randf_range(-trauma, trauma)
 
+func _handle_footstep(delta: float) -> void:
+	footstep_timer -= ((velocity * Vector3(1, 0, 1)).length() / SPEED) * delta
+	if footstep_timer < 0.0:
+		$Footstep.play()
+		footstep_timer = randf_range(0.25, 3)
+
 func _physics_process(delta: float) -> void:
 	if is_instance_valid(holded):
-		holded.position = global_position + Vector3(0, 0.75, 0) + Vector3.FORWARD.rotated(Vector3.UP, camera.global_rotation.y)
+		holded.global_position = global_position + Vector3.FORWARD.rotated(Vector3.UP, camera.global_rotation.y)
 		view_model_camera.visible = false
 	else:
 		view_model_camera.visible = true
@@ -97,7 +104,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
-	_handle_scale_device()
 	_handle_interact()
 
 	# Handle jump.
@@ -116,6 +122,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = lerp(velocity.x, direction.x * SPEED, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * SPEED, delta * 3.0)
+	
+	_handle_footstep(delta)
+
 
 	# Head bob
 	t_bob += delta * velocity.length() * float(is_on_floor())
@@ -135,3 +144,5 @@ func damage() -> void:
 		root.player_died()
 	else:
 		weak = true
+		trauma += 0.5
+		velocity = Vector3.ZERO

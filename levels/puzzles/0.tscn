@@ -1,62 +1,26 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1bbhri0ikgwo"]
+[gd_scene load_steps=5 format=3 uid="uid://d1bbhri0ikgwo"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_yg5u1"]
-[ext_resource type="Material" uid="uid://cnbvhajagbh3s" path="res://assets/materials/modular_floor/Floor.tres" id="2_bfian"]
-[ext_resource type="PackedScene" uid="uid://cccx1at3b2nls" path="res://assets/entities/player/player.tscn" id="2_x3tuv"]
-[ext_resource type="Material" uid="uid://ci52lilbilgg7" path="res://assets/materials/walls/walls.tres" id="3_0wni7"]
+[ext_resource type="PackedScene" uid="uid://cbsd11fpqdgfp" path="res://templates/template_height.tscn" id="5_j5j0a"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="5_vc7j7"]
-[ext_resource type="PackedScene" uid="uid://cgkd0ssxx3ehx" path="res://assets/ui/canvas_layer.tscn" id="6_kkicl"]
+[ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="10_yfatl"]
 
 [node name="PuzzleRoot" type="Node3D"]
 script = ExtResource("1_yg5u1")
-is_puzzle = true
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-material_override = ExtResource("2_bfian")
-use_collision = true
-size = Vector3(16, 2, 16)
-
-[node name="CSGBox3D7" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -6)
-material_override = ExtResource("2_bfian")
-use_collision = true
-size = Vector3(16, 1, 4)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -9)
-use_collision = true
-size = Vector3(16, 16, 2)
-material = ExtResource("3_0wni7")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 9)
-use_collision = true
-size = Vector3(16, 16, 2)
-material = ExtResource("3_0wni7")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9, 8, 3.93403e-07)
-use_collision = true
-size = Vector3(16, 16, 2)
-material = ExtResource("3_0wni7")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9, 8, -3.93403e-07)
-use_collision = true
-size = Vector3(16, 16, 2)
-material = ExtResource("3_0wni7")
-
-[node name="Player" parent="." instance=ExtResource("2_x3tuv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 5)
+[node name="Spawnpoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 6)
 
 [node name="Crate" parent="." instance=ExtResource("5_vc7j7")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -3, 0, -3)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -3, 2, -3)
 
 [node name="Crate2" parent="." instance=ExtResource("5_vc7j7")]
-transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 1, 0, -5)
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 1, 2, -5)
 
 [node name="Crate3" parent="." instance=ExtResource("5_vc7j7")]
-transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 5, 0, -5)
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 5, 2, -5)
 
-[node name="CanvasLayer" parent="." instance=ExtResource("6_kkicl")]
+[node name="Exit" parent="." instance=ExtResource("10_yfatl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.73726, 4.03766, -9.13061)
+
+[node name="LevelTemplate1" parent="." instance=ExtResource("5_j5j0a")]

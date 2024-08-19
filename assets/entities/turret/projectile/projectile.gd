@@ -1,6 +1,6 @@
 extends Area3D
 
-var speed := 40.0
+var speed := 100.0
 var lifetime := 5.0
 
 @onready var root := get_tree().current_scene
@@ -15,4 +15,6 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body.name == "Player":
 		body.damage()
+	if body.is_in_group("Destroyable"):
+		body.kill()
 	queue_free()

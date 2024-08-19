@@ -121,16 +121,6 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="Transition" type="ColorRect" parent="Container"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
 [node name="Paused" type="Label" parent="Container"]
 process_mode = 3
 visible = false
@@ -207,11 +197,13 @@ theme_override_constants/separation = 16
 alignment = 1
 
 [node name="Scale" type="Label" parent="Container/Actions"]
+visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_2k2bd")
 text = "Scale"
 
 [node name="Hold" type="Label" parent="Container/Actions"]
+visible = false
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_74d6x")
 text = "Hold"
@@ -302,6 +294,52 @@ text = "volume"
 [node name="Label2" type="Label" parent="Container/PauseMenu/VBoxContainer/GridContainer/Panel/VBoxContainer"]
 layout_mode = 2
 text = "10"
+
+[node name="Weight" type="Control" parent="Container"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Container/Weight"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 636.0
+offset_top = 340.0
+offset_right = 725.0
+offset_bottom = 380.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CurrentWeight" type="Label" parent="Container/Weight"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 628.0
+offset_top = 329.0
+offset_right = 704.0
+offset_bottom = 361.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "25"
+horizontal_alignment = 2
+
+[node name="Transition" type="ColorRect" parent="Container"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="Clock" parent="." instance=ExtResource("7_p6b8r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 8)

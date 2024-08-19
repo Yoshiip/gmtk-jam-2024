@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bugloqmd3fyd4" path="res://assets/clock/clock.tscn" id="9_aoj7x"]
 [ext_resource type="PackedScene" uid="uid://bgdkyy1upjj21" path="res://assets/world/cell/cell.tscn" id="11_tmfcj"]
 [ext_resource type="PackedScene" uid="uid://8uop1bhpw4yp" path="res://assets/props/rock/rock.tscn" id="12_jjgaa"]
-[ext_resource type="MeshLibrary" uid="uid://cnb5h74svym50" path="res://levels/MeshLibrary.tres" id="17_ynnrn"]
-[ext_resource type="PackedScene" uid="uid://spiy5h7kxiip" path="res://assets/button/small/button.tscn" id="18_fp8vu"]
+[ext_resource type="MeshLibrary" path="res://levels/MeshLibrary.tres" id="17_ynnrn"]
+[ext_resource type="PackedScene" uid="uid://spiy5h7kxiip" path="res://assets/button/small/small_button.tscn" id="18_fp8vu"]
 
 [sub_resource type="Environment" id="Environment_heanm"]
 ssao_enabled = true
@@ -124,8 +124,6 @@ transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -
 metadata/_edit_lock_ = true
 
 [node name="World" type="Node3D" parent="."]
-
-[node name="Props" type="Node3D" parent="."]
 
 [node name="Clones" type="Node3D" parent="."]
 

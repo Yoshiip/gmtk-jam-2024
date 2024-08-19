@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://osvb6akwnwae"]
+
+[ext_resource type="Script" path="res://assets/moving_platform/moving_platform.gd" id="1_135or"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sr1n4"]
+albedo_color = Color(0.517647, 0.552941, 0.701961, 1)
+
+[node name="MovingPlatform" type="CSGBox3D" groups=["GroupTrigger"]]
+use_collision = true
+size = Vector3(4, 8, 4)
+material = SubResource("StandardMaterial3D_sr1n4")
+script = ExtResource("1_135or")
