@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://spiy5h7kxiip"]
 
 [ext_resource type="Script" path="res://assets/button/small/small_button.gd" id="1_djri6"]
-[ext_resource type="PackedScene" uid="uid://cdupwpiwnwidm" path="res://models/PillarButton/PillarButton.blend" id="2_obtjg"]
+[ext_resource type="PackedScene" uid="uid://bkgvy05c6q77w" path="res://assets/button/pillar/model/v1/PillarButton.gltf" id="2_b77c5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_nq2u1"]
 height = 0.2
@@ -23,11 +23,8 @@ script = ExtResource("1_djri6")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("CylinderShape3D_nq2u1")
 
-[node name="Mesh" parent="." instance=ExtResource("2_obtjg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.03, 0)
-
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CylinderShape3D_vkyjr")
 
-[editable path="Mesh"]
+[node name="PillarButton" parent="." instance=ExtResource("2_b77c5")]

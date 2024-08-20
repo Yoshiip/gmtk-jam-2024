@@ -6,6 +6,7 @@ var bodies_inside: Array[Node3D]
 @export var max_range := 10.0
 
 func _physics_process(delta: float) -> void:
+	$Mesh/Propellers.rotation.y += delta * strength * 10.0
 	for body in bodies_inside:
 		var strength: float = max((max_range + (position.y - body.position.y)), 0.0) * strength * _get_scale().x
 		if is_instance_of(body, RigidBody3D):

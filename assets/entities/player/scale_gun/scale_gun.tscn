@@ -7,7 +7,6 @@
 [ext_resource type="AudioStream" uid="uid://03g0gir1qq5x" path="res://assets/entities/player/scale_gun/sfx/error.wav" id="18_x7if7"]
 
 [node name="ScaleGun" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_7ms87")
 
 [node name="Pitch" type="AudioStreamPlayer" parent="."]
@@ -21,10 +20,16 @@ stream = ExtResource("18_x7if7")
 bus = &"SFX"
 
 [node name="ScaleGun" parent="." instance=ExtResource("4_jkh03")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Gun" parent="ScaleGun" index="0"]
+layers = 2
+
+[node name="Hand" parent="ScaleGun" index="1"]
+layers = 2
 
 [node name="Option" type="Label3D" parent="ScaleGun"]
 transform = Transform3D(1, 0, 0, 0, 0.647894, 0.761731, 0, -0.761731, 0.647894, 0, 0.183928, -0.187781)
+layers = 2
 pixel_size = 0.002
 double_sided = false
 modulate = Color(0, 1, 0, 1)
