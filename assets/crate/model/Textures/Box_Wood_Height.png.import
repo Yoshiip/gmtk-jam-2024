@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjlxhy6wy6wcr"
-path="res://.godot/imported/Box_Wood_Height.png-2533a76b91c9daa4c06c812c7fecf69d.ctex"
+uid="uid://bbj0j2w1wjrnx"
+path="res://.godot/imported/Box_Wood_Height.png-46dc06af45e9324901da76c617655b63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://models/Box/Textures/Box_Wood_Height.png"
-dest_files=["res://.godot/imported/Box_Wood_Height.png-2533a76b91c9daa4c06c812c7fecf69d.ctex"]
+source_file="res://assets/crate/model/Textures/Box_Wood_Height.png"
+dest_files=["res://.godot/imported/Box_Wood_Height.png-46dc06af45e9324901da76c617655b63.ctex"]
 
 [params]
 

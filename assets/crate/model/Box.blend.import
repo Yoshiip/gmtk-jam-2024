@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bbawwfer2b882"
-path="res://.godot/imported/Wall.blend-5335884e58184a4506431cb8e57d5a5c.scn"
+uid="uid://bcuc43kgruume"
+path="res://.godot/imported/Box.blend-2735ab116b4352f09909518200e2ba16.scn"
 
 [deps]
 
-source_file="res://models/Modular Walls/Wall.blend"
-dest_files=["res://.godot/imported/Wall.blend-5335884e58184a4506431cb8e57d5a5c.scn"]
+source_file="res://assets/crate/model/Box.blend"
+dest_files=["res://.godot/imported/Box.blend-2735ab116b4352f09909518200e2ba16.scn"]
 
 [params]
 
@@ -31,19 +31,7 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={
-"meshes": {
-"2x2x2_Cube_002": {
-"generate/lightmap_uv": 0,
-"generate/lods": 0,
-"generate/shadow_meshes": 0,
-"lods/normal_merge_angle": 60.0,
-"lods/normal_split_angle": 25.0,
-"save_to_file/enabled": true,
-"save_to_file/path": "res://models/gridmap/wall_2x2x2.res"
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

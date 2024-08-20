@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8rs4qd5836jy"
-path.s3tc="res://.godot/imported/Box_Wood_Normal.png-e8c4995c437416e00e37940a51163d1d.s3tc.ctex"
+uid="uid://cvgbdefp3rte7"
+path.s3tc="res://.godot/imported/Box_Frame_Normal.png-be7d929ea89e55239ca9a641793484bd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/Box/Textures/Box_Wood_Normal.png"
-dest_files=["res://.godot/imported/Box_Wood_Normal.png-e8c4995c437416e00e37940a51163d1d.s3tc.ctex"]
+source_file="res://assets/crate/model/Textures/Box_Frame_Normal.png"
+dest_files=["res://.godot/imported/Box_Frame_Normal.png-be7d929ea89e55239ca9a641793484bd.s3tc.ctex"]
 
 [params]
 
@@ -25,7 +25,7 @@ compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=1
-roughness/src_normal="res://models/Box/Textures/Box_Wood_Normal.png"
+roughness/src_normal="res://assets/crate/model/Textures/Box_Frame_Normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

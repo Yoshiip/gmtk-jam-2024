@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b764a8o15xutb"]
-
-[ext_resource type="PackedScene" uid="uid://cpy822racsp07" path="res://assets/world/walls/wall-2.blend" id="1_rq7ct"]
-
-[node name="Walls" type="Node3D"]
-
-[node name="wall-2" parent="." instance=ExtResource("1_rq7ct")]
-
-[editable path="wall-2"]

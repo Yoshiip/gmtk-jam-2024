@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cpplnu7bd720g"]
+[gd_scene load_steps=7 format=3 uid="uid://cpplnu7bd720g"]
 
 [ext_resource type="Script" path="res://levels/menu/menu.gd" id="1_55olg"]
 [ext_resource type="Theme" uid="uid://c6orqmnww3tlp" path="res://theme.tres" id="1_jh8i7"]
-[ext_resource type="PackedScene" uid="uid://rn5c36c3fqkb" path="res://models/Gun/ScaleGun.blend" id="3_neymy"]
 [ext_resource type="Texture2D" uid="uid://cbafbtg8h256a" path="res://assets/ui/gmtk-jam-2024-logo.png" id="4_kipqg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ascdp"]
@@ -118,11 +117,3 @@ uppercase = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.881733, -0.160557, 0.443586, 0, 0.940301, 0.340345, -0.471749, -0.300093, 0.829094, 2.79192, 2.3251, 5.19933)
-
-[node name="ScaleGun" parent="." instance=ExtResource("3_neymy")]
-transform = Transform3D(-9.61651e-08, 0, 2.2, 0, 2.2, 0, -2.2, 0, -9.61651e-08, 0, 0, 0)
-
-[node name="Armature" parent="ScaleGun" index="2"]
-visible = false
-
-[editable path="ScaleGun"]

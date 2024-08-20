@@ -1,157 +1,152 @@
-[gd_scene load_steps=17 format=3 uid="uid://6xkfwa6xfth1"]
+[gd_scene load_steps=9 format=3 uid="uid://dded0gl71ugkw"]
 
-[ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_j11jc"]
-[ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="2_systr"]
-[ext_resource type="PackedScene" uid="uid://b5s4pdikoeb7c" path="res://templates/template_void_large.tscn" id="3_us0og"]
-[ext_resource type="Material" uid="uid://cw1362kpvskh8" path="res://assets/materials/stylized/floor.tres" id="4_4ubew"]
-[ext_resource type="Script" path="res://assets/bounce_surface/bounce_surface.gd" id="5_hygge"]
-[ext_resource type="PackedScene" uid="uid://ddxu8amaw1cae" path="res://assets/ball_dispenser/ball_dispenser.tscn" id="6_stw5j"]
-[ext_resource type="PackedScene" uid="uid://c07olvjqjynfe" path="res://assets/props/ball/ball_11.tscn" id="7_3ypsp"]
-[ext_resource type="PackedScene" uid="uid://spiy5h7kxiip" path="res://assets/button/small/small_button.tscn" id="8_seycd"]
-[ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="9_ih1o2"]
-[ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="10_irbsy"]
-[ext_resource type="PackedScene" uid="uid://dy1hdkp2tvs6l" path="res://assets/buttons/pressure_button/pressure_button.tscn" id="11_l5rcu"]
-[ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="12_h4674"]
+[ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_3ryrd"]
+[ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="2_dgj5m"]
+[ext_resource type="PackedScene" uid="uid://d2g2pkvfgklty" path="res://assets/props/ball/ball.tscn" id="7_t1qxs"]
+[ext_resource type="PackedScene" uid="uid://b05tad6jesfxi" path="res://templates/template_empty_large.tscn" id="8_8cmk0"]
+[ext_resource type="PackedScene" uid="uid://dy1hdkp2tvs6l" path="res://assets/buttons/pressure_button/pressure_button.tscn" id="9_5hu08"]
+[ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="10_280o3"]
+[ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="11_nvfic"]
+[ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="12_cog8a"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ekoq4"]
-bounce = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehddw"]
-albedo_color = Color(1, 0.439216, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4y3ry"]
-size = Vector3(0.25, 4, 4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ovwkx"]
-size = Vector3(0.25, 4, 4)
-
-[node name="11" type="Node3D"]
-script = ExtResource("1_j11jc")
-level_id = 11
+[node name="12" type="Node3D"]
+script = ExtResource("1_3ryrd")
+can_scale_self = true
+level_id = 12
 
 [node name="Spawnpoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 
-[node name="Exit" parent="." instance=ExtResource("2_systr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 4, 9)
+[node name="Exit" parent="." instance=ExtResource("2_dgj5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
 
-[node name="PuzzleTemplate0" parent="." instance=ExtResource("3_us0og")]
+[node name="Door" parent="." instance=ExtResource("11_nvfic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+open_delay = 5.0
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, -1, 0)
-material_override = ExtResource("4_4ubew")
-use_collision = true
-size = Vector3(8, 2, 24)
+[node name="Door2" parent="." instance=ExtResource("11_nvfic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 2, 9)
-material_override = ExtResource("4_4ubew")
-use_collision = true
-size = Vector3(8, 4, 6)
+[node name="Door3" parent="." instance=ExtResource("11_nvfic")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, 0)
+inverted = true
+
+[node name="Door4" parent="." instance=ExtResource("11_nvfic")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, 0)
+trigger_group = 2
+open_delay = 0.0
+
+[node name="Door5" parent="." instance=ExtResource("11_nvfic")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 0, 0)
+trigger_group = 4
+open_delay = 2.0
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -1, -9)
-material_override = ExtResource("4_4ubew")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, -4)
 use_collision = true
-size = Vector3(40, 2, 6)
+size = Vector3(2, 8, 2)
+material = ExtResource("12_cog8a")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, -4)
+use_collision = true
+size = Vector3(4, 3, 2)
+material = ExtResource("12_cog8a")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.75, -6.5)
+use_collision = true
+size = Vector3(4, 1.5, 3)
+material = ExtResource("12_cog8a")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -4, 8)
-material_override = ExtResource("4_4ubew")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -4)
 use_collision = true
-size = Vector3(20, 2, 4)
+size = Vector3(2, 8, 2)
+material = ExtResource("12_cog8a")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -10.5)
+use_collision = true
+size = Vector3(2, 8, 3)
+material = ExtResource("12_cog8a")
+
+[node name="CSGBox3D14" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4.5, -8.5)
+use_collision = true
+size = Vector3(2, 7, 1)
+material = ExtResource("12_cog8a")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -6.5)
+use_collision = true
+size = Vector3(2, 8, 3)
+material = ExtResource("12_cog8a")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0, 1, 4.85705, 4.51555, 8)
-material_override = ExtResource("4_4ubew")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 4, 7.5)
 use_collision = true
-size = Vector3(8, 0.5, 4)
+size = Vector3(9, 8, 9)
+material = ExtResource("12_cog8a")
 
-[node name="Bounce" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -1, 8)
-collision_layer = 3
-collision_mask = 3
-axis_lock_linear_x = true
-axis_lock_linear_y = true
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-axis_lock_angular_z = true
-physics_material_override = SubResource("PhysicsMaterial_ekoq4")
-script = ExtResource("5_hygge")
-scales = Array[float]([0.25, 1.0])
-current_scale = 1
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 4, 4)
+use_collision = true
+size = Vector3(9, 8, 2)
+material = ExtResource("12_cog8a")
 
-[node name="Mesh" type="MeshInstance3D" parent="Bounce"]
-material_override = SubResource("StandardMaterial3D_ehddw")
-mesh = SubResource("BoxMesh_4y3ry")
+[node name="CSGBox3D12" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 4, 8.5)
+use_collision = true
+size = Vector3(2, 8, 7)
+material = ExtResource("12_cog8a")
 
-[node name="CollisionShape" type="CollisionShape3D" parent="Bounce"]
-shape = SubResource("BoxShape3D_ovwkx")
+[node name="CSGBox3D9" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 4, 4)
+use_collision = true
+size = Vector3(2, 8, 2)
+material = ExtResource("12_cog8a")
 
-[node name="BallDispenser" parent="." instance=ExtResource("6_stw5j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 13, 8)
-instance = ExtResource("7_3ypsp")
+[node name="CSGBox3D11" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 4, -7.5)
+use_collision = true
+size = Vector3(6, 8, 9)
+material = ExtResource("12_cog8a")
 
-[node name="Button2" parent="." instance=ExtResource("8_seycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -7)
-metadata/_edit_group_ = true
+[node name="CSGBox3D10" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 4.5, 4)
+use_collision = true
+size = Vector3(1, 7, 2)
+material = ExtResource("12_cog8a")
 
-[node name="Button3" parent="." instance=ExtResource("8_seycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
-metadata/_edit_group_ = true
+[node name="PressureButton" parent="." instance=ExtResource("9_5hu08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -4)
 
-[node name="Button4" parent="." instance=ExtResource("8_seycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -7)
-metadata/_edit_group_ = true
-
-[node name="Button5" parent="." instance=ExtResource("8_seycd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -7)
-metadata/_edit_group_ = true
-
-[node name="PressureButton" parent="." instance=ExtResource("11_l5rcu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -3, 8)
-trigger_group = 1
-target_weight = 10.0
-
-[node name="PressureButton2" parent="." instance=ExtResource("11_l5rcu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -3, 8)
-trigger_group = 2
-target_weight = 10.0
-
-[node name="Crate" parent="." instance=ExtResource("12_h4674")]
-transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -20.3, 0, -9)
-current_scale = 0
-
-[node name="Door" parent="." instance=ExtResource("9_ih1o2")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 0, -9)
-trigger_group = 1
-
-[node name="Door2" parent="." instance=ExtResource("9_ih1o2")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, -9)
+[node name="PressureButton2" parent="." instance=ExtResource("9_5hu08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
 trigger_group = 2
 
-[node name="Door3" parent="." instance=ExtResource("9_ih1o2")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4, 0, -9)
-trigger_group = 1
+[node name="PressureButton3" parent="." instance=ExtResource("9_5hu08")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+trigger_group = 4
 
-[node name="Fence" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.25, 0.4, -6.1)
-material_override = ExtResource("10_irbsy")
-use_collision = true
-size = Vector3(0.2, 0.8, 27.5)
+[node name="Crate" parent="." instance=ExtResource("10_280o3")]
+transform = Transform3D(0.627852, 0, -0.168232, 0, 0.65, 0, 0.168232, 0, 0.627852, 18.4, 0.5, -7.5)
 
-[node name="Fence2" type="CSGBox3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.25, 2.8, -6.1)
-material_override = ExtResource("10_irbsy")
-use_collision = true
-size = Vector3(0.2, 0.8, 27.5)
+[node name="Ball" parent="." instance=ExtResource("7_t1qxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0.5, -8.5)
+mass = 50.0
+scales = Array[float]([2.0])
 
-[editable path="Button2"]
-[editable path="Button2/Mesh"]
-[editable path="Button3"]
-[editable path="Button3/Mesh"]
-[editable path="Button4"]
-[editable path="Button4/Mesh"]
-[editable path="Button5"]
-[editable path="Button5/Mesh"]
+[node name="PuzzleTemplate0" parent="." instance=ExtResource("8_8cmk0")]
+
+[node name="CSGBox3D2" parent="PuzzleTemplate0/Walls" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, 13)
+
+[node name="CSGBox3D3" parent="PuzzleTemplate0/Walls" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -13)
+
+[node name="CSGBox3D4" parent="PuzzleTemplate0/Walls" index="2"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 12, -5.68248e-07)
+
+[editable path="PuzzleTemplate0"]

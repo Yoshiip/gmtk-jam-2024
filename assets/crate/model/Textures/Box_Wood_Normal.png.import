@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5uoq3wuy4hxp"
-path.s3tc="res://.godot/imported/WallNormal.png-5e631139d37c8e3258b3e9befd89434b.s3tc.ctex"
+uid="uid://m1qirvricaba"
+path.s3tc="res://.godot/imported/Box_Wood_Normal.png-e52c085c7378586ea34686310d2e7fee.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://models/Modular Walls/WallNormal.png"
-dest_files=["res://.godot/imported/WallNormal.png-5e631139d37c8e3258b3e9befd89434b.s3tc.ctex"]
+source_file="res://assets/crate/model/Textures/Box_Wood_Normal.png"
+dest_files=["res://.godot/imported/Box_Wood_Normal.png-e52c085c7378586ea34686310d2e7fee.s3tc.ctex"]
 
 [params]
 
@@ -24,8 +24,8 @@ compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://assets/crate/model/Textures/Box_Wood_Normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
