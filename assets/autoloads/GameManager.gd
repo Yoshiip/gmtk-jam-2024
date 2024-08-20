@@ -1,7 +1,7 @@
 extends Node
 
 
-const MAX_LEVEL := 12
+const MAX_LEVEL := 11
 
 var levels_completed: Array[int ]= []
 
@@ -10,10 +10,10 @@ func level_completed() -> void:
 	if !levels_completed.has(current_level):
 		levels_completed.append(current_level)
 	if current_level == MAX_LEVEL:
-		get_tree().change_scene_to_file("res://islands/exit.tscn")
+		MusicManager.play(MusicManager.Musics.NONE)
+		get_tree().change_scene_to_file("res://levels/end.tscn")
 	else:
 		get_tree().change_scene_to_file(str("res://levels/puzzles/", current_level + 1, ".tscn"))
-
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("fullscreen"):

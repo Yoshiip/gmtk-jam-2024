@@ -143,6 +143,8 @@ func _get_scale(index = -1) -> Vector3:
 
 
 func _process(delta: float) -> void:
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	trauma *= 0.75
 	$Head/Camera.h_offset = randf_range(-trauma, trauma)
 	$Head/Camera.v_offset = randf_range(-trauma, trauma)

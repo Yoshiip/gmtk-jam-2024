@@ -21,6 +21,8 @@ func play(music: Musics) -> void:
 	current_music = music
 	if is_instance_valid(current_stream):
 		current_stream.queue_free()
+	if music == Musics.NONE:
+		return
 	current_stream = AudioStreamPlayer.new()
 	match music:
 		Musics.MENU:
