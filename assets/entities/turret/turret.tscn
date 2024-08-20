@@ -243,7 +243,7 @@ base_mass = 100.0
 scales = Array[float]([0.75, 1.0, 1.5])
 current_scale = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_inxmm")
 
@@ -272,12 +272,15 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 1.2, 
 
 [node name="ShootSlow" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_8q6sv")
+bus = &"SFX"
 
 [node name="TurretOn" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("18_mhlp2")
+bus = &"SFX"
 
 [node name="TurretOff" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("19_r35ah")
+bus = &"SFX"
 
 [node name="ShootRaycast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

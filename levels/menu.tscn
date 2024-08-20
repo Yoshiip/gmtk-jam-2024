@@ -1,48 +1,128 @@
-[gd_scene load_steps=3 format=3 uid="uid://cpplnu7bd720g"]
+[gd_scene load_steps=8 format=3 uid="uid://cpplnu7bd720g"]
 
 [ext_resource type="Script" path="res://levels/menu/menu.gd" id="1_55olg"]
 [ext_resource type="Theme" uid="uid://c6orqmnww3tlp" path="res://theme.tres" id="1_jh8i7"]
+[ext_resource type="PackedScene" uid="uid://rn5c36c3fqkb" path="res://models/Gun/ScaleGun.blend" id="3_neymy"]
+[ext_resource type="Texture2D" uid="uid://cbafbtg8h256a" path="res://assets/ui/gmtk-jam-2024-logo.png" id="4_kipqg"]
 
-[node name="Menu" type="Control"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ascdp"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_xfyfw"]
+sky_material = SubResource("ProceduralSkyMaterial_ascdp")
+
+[sub_resource type="Environment" id="Environment_3crta"]
+background_mode = 1
+sky = SubResource("Sky_xfyfw")
+ambient_light_source = 2
+ambient_light_color = Color(0.462291, 0.462291, 0.462291, 1)
+tonemap_mode = 2
+
+[node name="Menu" type="Node3D"]
+script = ExtResource("1_55olg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.471321, 0.166903, 0, 0.333807, 0.942641, -0.5, 0.816351, -0.289085, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3crta")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_55olg")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -123.0
-offset_right = 84.0
-offset_bottom = 123.0
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("1_jh8i7")
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-text = "COPYLICATION"
+[node name="Logo" type="TextureRect" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -155.0
+offset_right = 256.0
+offset_bottom = -32.0
+grow_vertical = 0
+texture = ExtResource("4_kipqg")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Main" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/VBoxContainer/Main"]
+[node name="Levels" type="VBoxContainer" parent="CanvasLayer/Control/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Main"]
+[node name="Title" type="Label" parent="CanvasLayer/Control/HBox/Levels"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "COPYLICATION"
+
+[node name="Main" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Levels"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/HBox/Levels/Main"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Levels/Main"]
 layout_mode = 2
 text = "debug levels"
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/VBoxContainer/Main"]
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/HBox/Levels/Main"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Credits" type="Panel" parent="CanvasLayer/Control/HBox"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="CanvasLayer/Control/HBox/Credits"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Credits/Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "credits"
+uppercase = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.881733, -0.160557, 0.443586, 0, 0.940301, 0.340345, -0.471749, -0.300093, 0.829094, 2.79192, 2.3251, 5.19933)
+
+[node name="ScaleGun" parent="." instance=ExtResource("3_neymy")]
+transform = Transform3D(-9.61651e-08, 0, 2.2, 0, 2.2, 0, -2.2, 0, -9.61651e-08, 0, 0, 0)
+
+[node name="Armature" parent="ScaleGun" index="2"]
+visible = false
+
+[editable path="ScaleGun"]

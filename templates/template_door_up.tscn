@@ -17,24 +17,6 @@ material_override = ExtResource("1_ih4cb")
 use_collision = true
 size = Vector3(6, 6, 32)
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 9, 5)
-material_override = ExtResource("2_pdt2q")
-use_collision = true
-size = Vector3(1, 6, 1)
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 9, 5)
-material_override = ExtResource("2_pdt2q")
-use_collision = true
-size = Vector3(1, 6, 1)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 10.5, 5)
-material_override = ExtResource("2_pdt2q")
-use_collision = true
-size = Vector3(4, 3, 1)
-
 [node name="Walls" type="Node3D" parent="."]
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]

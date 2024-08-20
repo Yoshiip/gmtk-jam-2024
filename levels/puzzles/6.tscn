@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6ws0huqyywrl"]
+[gd_scene load_steps=12 format=3 uid="uid://6ws0huqyywrl"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_qdots"]
 [ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="2_v4hfl"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://osvb6akwnwae" path="res://assets/moving_platform/moving_platform.tscn" id="5_urok1"]
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="6_7h162"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="6_wu3ca"]
+[ext_resource type="PackedScene" uid="uid://ko4baaiduxuk" path="res://assets/board/board.tscn" id="9_jx7f0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gr46p"]
 size = Vector3(16, 0.25, 3)
@@ -15,9 +16,9 @@ size = Vector3(16, 0.25, 3)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bf2nk"]
 size = Vector3(16, 0.25, 3)
 
-[node name="PuzzleRoot" type="Node3D"]
+[node name="6" type="Node3D"]
 script = ExtResource("1_qdots")
-level_id = 3
+level_id = 6
 
 [node name="Spawnpoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
@@ -40,7 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 8)
 collision_layer = 3
 mass = 50.0
 script = ExtResource("5_fx76s")
-base_mass = 50.0
 scales = Array[float]([0.2, 0.5, 1.0])
 current_scale = 2
 
@@ -69,9 +69,12 @@ target_weight = 10.0
 [node name="MovingPlatform" parent="." instance=ExtResource("5_urok1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, -4)
 size = Vector3(4, 6, 2)
-trigger_position = Vector3(0, 2, 0)
+trigger_position = Vector3(0, 3, 0)
 
 [node name="MovingPlatform2" parent="." instance=ExtResource("5_urok1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -1, -2)
 size = Vector3(4, 4, 2)
 trigger_position = Vector3(0, 3, 0)
+
+[node name="Board" parent="." instance=ExtResource("9_jx7f0")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 12, 2, 4)

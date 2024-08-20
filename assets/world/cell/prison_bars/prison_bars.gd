@@ -30,9 +30,10 @@ func _transition_scale() -> void:
 	tween.tween_property(self, "scale", Vector3(s, 1, s), 0.3)
 	_hide_outside_bar()
 
-func on_scale(plus : bool) -> void:
+func on_scale(plus : bool) -> bool:
 	if plus:
 		current_scale = min(current_scale + 1, SCALES.size() - 1)
 	else:
 		current_scale = max(current_scale - 1, 0)
 	_transition_scale()
+	return true

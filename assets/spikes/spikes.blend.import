@@ -3,20 +3,20 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dubjgpxlti780"
-path="res://.godot/imported/Camera.blend-d7cb85a1516d52e9f0203b23272483f4.scn"
+uid="uid://0jk6g4m4oyba"
+path="res://.godot/imported/spikes.blend-1585654e3547347ecec88b96ac933bf0.scn"
 
 [deps]
 
-source_file="res://models/camera/Camera.blend"
-dest_files=["res://.godot/imported/Camera.blend-d7cb85a1516d52e9f0203b23272483f4.scn"]
+source_file="res://assets/spikes/spikes.blend"
+dest_files=["res://.godot/imported/spikes.blend-1585654e3547347ecec88b96ac933bf0.scn"]
 
 [params]
 
 nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
-nodes/root_scale=1.0
+nodes/root_scale=2.0
 nodes/import_as_skeleton_bones=false
 meshes/ensure_tangents=true
 meshes/generate_lods=true

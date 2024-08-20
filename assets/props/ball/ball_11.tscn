@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c07olvjqjynfe"]
+
+[ext_resource type="PackedScene" uid="uid://d2g2pkvfgklty" path="res://assets/props/ball/ball.tscn" id="1_sw88p"]
+
+[node name="Ball_11" instance=ExtResource("1_sw88p")]
+axis_lock_linear_z = true

@@ -1,33 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcx7m0lb330sy"]
+[gd_scene load_steps=5 format=3 uid="uid://bcx7m0lb330sy"]
 
 [ext_resource type="Script" path="res://assets/camera/camera.gd" id="1_y7sro"]
-[ext_resource type="PackedScene" uid="uid://dubjgpxlti780" path="res://models/camera/Camera.blend" id="2_xfn0m"]
+[ext_resource type="PackedScene" uid="uid://d4l7xca8yx32w" path="res://assets/camera/Camera.blend" id="2_vnl7y"]
+[ext_resource type="AudioStream" uid="uid://c3xy2hpo25fi8" path="res://assets/entities/clone/alerted.wav" id="3_8npx0"]
 
-[node name="Camera" type="Marker3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_kijsf"]
+size = Vector3(0.257813, 0.263733, 0.85498)
+
+[node name="Camera" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0)
+collision_layer = 3
+collision_mask = 3
+freeze = true
 script = ExtResource("1_y7sro")
+scales = Array[float]([1.0, 1.5, 2.0])
+
+[node name="Mesh" parent="." instance=ExtResource("2_vnl7y")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="DetectionRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0150726, -0.372048)
+target_position = Vector3(0, 0, -20)
 
 [node name="Area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="CollisionShape3D2" type="CollisionPolygon3D" parent="Area"]
+[node name="CollisionShape" type="CollisionPolygon3D" parent="Area"]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
-depth = 4.0
-polygon = PackedVector2Array(-0.5, 0.5, 4, 2, 4, -2, -0.5, -0.5)
+depth = 8.0
+polygon = PackedVector2Array(-0.5, 0.5, 8, 4, 8, -4, -0.5, -0.5)
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Area"]
+[node name="SpotLight" type="SpotLight3D" parent="Area"]
 transform = Transform3D(1, 7.45058e-09, 0, -7.45058e-09, 1, 2.98023e-08, 2.22045e-16, -2.98023e-08, 1, 0, -0.010631, -0.214107)
 light_color = Color(0.929412, 0, 0, 1)
 light_energy = 8.0
 spot_range = 10.0
 
-[node name="DetectionRayCast" type="RayCast3D" parent="Area"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.0434812, -0.627698)
-target_position = Vector3(0, 0, -20)
+[node name="Eyes" type="Marker3D" parent="."]
 
-[node name="Mesh" parent="Area" instance=ExtResource("2_xfn0m")]
-transform = Transform3D(-0.26, 0, 3.92589e-08, -3.41824e-09, 0.259013, -0.022638, -3.91098e-08, -0.022638, -0.259013, 0, 0, 0)
+[node name="Alerted" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_8npx0")
+bus = &"SFX"
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kijsf")
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]
-
-[editable path="Area/Mesh"]

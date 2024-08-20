@@ -1,12 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bl43061g3f65q"]
+[gd_scene load_steps=7 format=3 uid="uid://bl43061g3f65q"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_q81jr"]
 [ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="2_ybauy"]
 [ext_resource type="PackedScene" uid="uid://b1wxcylxbwgov" path="res://templates/template_empty.tscn" id="4_wr1ds"]
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="5_ycnhb"]
+[ext_resource type="PackedScene" uid="uid://ko4baaiduxuk" path="res://assets/board/board.tscn" id="6_kwmli"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="7_mbaxr"]
 
-[node name="PuzzleRoot" type="Node3D"]
+[node name="4" type="Node3D"]
 script = ExtResource("1_q81jr")
 level_id = 4
 
@@ -202,6 +203,7 @@ current_scale = 3
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -10.75)
 material_override = ExtResource("5_ycnhb")
+use_collision = true
 size = Vector3(24, 6, 2.5)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
@@ -227,3 +229,6 @@ transform = Transform3D(0.935482, 0, 0, 0, 1, 0, 0, 0, 0.935482, -8.88708, 12, 8
 use_collision = true
 size = Vector3(5, 24, 5)
 material = ExtResource("5_ycnhb")
+
+[node name="Board" parent="." instance=ExtResource("6_kwmli")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 2, 3)

@@ -1,10 +1,62 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://c6orqmnww3tlp"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://c6orqmnww3tlp"]
 
 [ext_resource type="FontFile" uid="uid://c0ttvgvth4rp0" path="res://assets/ui/fonts/FuturaCyrillicMedium.ttf" id="1_oe2bd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xhl4"]
+bg_color = Color(0.180005, 0.180005, 0.180005, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.384314, 0.384314, 0.886275, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ut8tb"]
+bg_color = Color(0.262932, 0.262932, 0.262932, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.466181, 0.466181, 0.466181, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evp5c"]
+bg_color = Color(0.180005, 0.180005, 0.180005, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 4
+border_color = Color(0.385493, 0.385492, 0.385492, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xlqgb"]
+bg_color = Color(0.344076, 0.344076, 0.344075, 1)
+border_width_left = 2
+border_width_top = 4
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.144063, 0.144063, 0.144062, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [resource]
 default_font = ExtResource("1_oe2bd")
 default_font_size = 24
+Button/styles/focus = SubResource("StyleBoxFlat_3xhl4")
+Button/styles/hover = SubResource("StyleBoxFlat_ut8tb")
+Button/styles/normal = SubResource("StyleBoxFlat_evp5c")
+Button/styles/pressed = SubResource("StyleBoxFlat_xlqgb")
 Label/colors/font_shadow_color = Color(0.31802, 0.31802, 0.31802, 1)
 Label/constants/outline_size = 4
 Label/constants/shadow_offset_x = 2

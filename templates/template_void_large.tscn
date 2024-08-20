@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5s4pdikoeb7c"]
+
+[ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="2_xbqxv"]
+
+[node name="PuzzleTemplate0" type="Node3D"]
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, 13)
+use_collision = true
+size = Vector3(48, 256, 2)
+material = ExtResource("2_xbqxv")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -12, -13)
+use_collision = true
+size = Vector3(48, 256, 2)
+material = ExtResource("2_xbqxv")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -25, -12, -5.68248e-07)
+use_collision = true
+size = Vector3(24, 256, 2)
+material = ExtResource("2_xbqxv")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Walls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 25, -12, 5.68248e-07)
+use_collision = true
+size = Vector3(24, 256, 2)
+material = ExtResource("2_xbqxv")

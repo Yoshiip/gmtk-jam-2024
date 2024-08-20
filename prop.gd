@@ -1,9 +1,10 @@
 class_name Prop
 extends RigidBody3D
 
-@export var base_mass := 1.0
 @export var scales: Array[float] = []
 @export var current_scale := 0
+@onready var base_position := position
+@onready var base_mass := mass
 
 @export var holdable := false
 var throwed := false
@@ -13,7 +14,9 @@ var holded := false:
 		holded = value
 		$CollisionShape.disabled = holded
 
+
 func _ready() -> void:
+	continuous_cd = true
 	_transition_scale()
 
 func _get_scale(index = -1) -> Vector3:
@@ -47,19 +50,24 @@ func _transition_scale() -> void:
 	tween.tween_property($Mesh, "scale", _get_scale(), 0.3)
 	tween.set_parallel()
 	tween.tween_property($CollisionShape, "scale", _get_scale(), 0.0)
-	mass = base_mass * scales[current_scale]
 
-func on_scale(plus := true) -> void:
-	if plus:
+func _physics_process(delta: float) -> void:
+	if position.y < -64:
+		linear_velocity = Vector3.ZERO
+		position = base_position
+
+func on_scale(scaled_up := true) -> bool:
+	if scaled_up:
 		var new_scale: float = min(current_scale + 1, scales.size() - 1)
 		if _can_change_scale(new_scale):
 			current_scale = new_scale
 		else:
-			return
+			return false
 	else:
 		current_scale = max(current_scale - 1, 0)
 	_transition_scale()
-	mass = base_mass * current_scale
+	mass = base_mass * scales[current_scale]
+	return true
 
 func on_hold(picked_up := true, throw := false) -> void:
 	holded = picked_up
@@ -71,3 +79,6 @@ func on_hold(picked_up := true, throw := false) -> void:
 		if throw:
 			var player := get_tree().get_nodes_in_group("Player")[0]
 			apply_impulse(((global_position - player.global_position) * Vector3(1, 0, 1)).normalized() * 10.0 + Vector3(0, 2, 0))
+
+func destroy() -> void:
+	queue_free()

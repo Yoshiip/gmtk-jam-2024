@@ -1,16 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2g2pkvfgklty"]
 
-[ext_resource type="Script" path="res://prop.gd" id="1_nf8x1"]
+[ext_resource type="Script" path="res://assets/props/ball/ball.gd" id="1_oc7gr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n0o1a"]
 radius = 0.25
 
-[node name="Ball" type="RigidBody3D"]
+[node name="Ball" type="RigidBody3D" groups=["Destroyable"]]
 collision_layer = 9
 collision_mask = 9
 mass = 10.0
-script = ExtResource("1_nf8x1")
-base_mass = 10.0
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_oc7gr")
 scales = Array[float]([1.0])
 holdable = true
 

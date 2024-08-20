@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bs0h4d8fwsyer"]
+[gd_scene load_steps=9 format=3 uid="uid://bs0h4d8fwsyer"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_834cr"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="3_p2553"]
@@ -7,20 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="4_xj7pl"]
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="5_dgir0"]
 [ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="6_n6410"]
-[ext_resource type="Script" path="res://assets/fan/fan.gd" id="7_w1vkv"]
+[ext_resource type="PackedScene" uid="uid://ko4baaiduxuk" path="res://assets/board/board.tscn" id="8_ugkog"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip6b8"]
-albedo_color = Color(0.197937, 0.197937, 0.197937, 1)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_a8ega"]
-height = 64.0
-radius = 1.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ch8fx"]
-height = 0.2
-radius = 1.0
-
-[node name="PuzzleRoot" type="Node3D"]
+[node name="1" type="Node3D"]
 script = ExtResource("1_834cr")
 level_id = 1
 
@@ -38,42 +27,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -5)
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.25, 2.35, 5.4)
 material_override = ExtResource("5_dgir0")
+use_collision = true
 size = Vector3(5.5, 4.7, 1)
 
 [node name="Crate" parent="." instance=ExtResource("3_p2553")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.2, 0, 8.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2, 0, 8)
 
 [node name="Crate2" parent="." instance=ExtResource("3_p2553")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.2, 0, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 0, 10)
 
 [node name="Door" parent="." instance=ExtResource("6_n6410")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.6, 0, -6)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, -6)
 
-[node name="Fan" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
-disable_mode = 1
-collision_layer = 3
-collision_mask = 3
-mass = 1000.0
-freeze = true
-script = ExtResource("7_w1vkv")
-base_mass = 1000.0
-scales = Array[float]([0.75, 1.0, 1.5, 2.5])
-current_scale = 1
-
-[node name="Mesh" type="CSGCylinder3D" parent="Fan"]
-radius = 1.0
-height = 0.25
-material = SubResource("StandardMaterial3D_ip6b8")
-
-[node name="AirArea" type="Area3D" parent="Fan"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Fan/AirArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 32, 0)
-shape = SubResource("CylinderShape3D_a8ega")
-
-[node name="CollisionShape" type="CollisionShape3D" parent="Fan"]
-shape = SubResource("CylinderShape3D_ch8fx")
-
-[connection signal="body_entered" from="Fan/AirArea" to="Fan" method="_on_air_area_body_entered"]
-[connection signal="body_exited" from="Fan/AirArea" to="Fan" method="_on_air_area_body_exited"]
+[node name="Board" parent="." instance=ExtResource("8_ugkog")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 2, -3)

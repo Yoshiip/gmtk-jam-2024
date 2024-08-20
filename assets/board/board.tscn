@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://ko4baaiduxuk"]
+
+[ext_resource type="Script" path="res://assets/board/board.gd" id="1_eet8a"]
+[ext_resource type="PackedScene" uid="uid://0c6dmp0iddoo" path="res://assets/board/board.blend" id="2_p0q2b"]
+[ext_resource type="FontFile" uid="uid://ctl06nwvqd17" path="res://assets/ui/fonts/FuturaCyrillicBold.ttf" id="3_yjx84"]
+[ext_resource type="FontFile" uid="uid://c0ttvgvth4rp0" path="res://assets/ui/fonts/FuturaCyrillicMedium.ttf" id="4_xi3lc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lsgm5"]
+size = Vector3(1.2, 2, 0.2)
+
+[node name="Board" type="RigidBody3D"]
+freeze = true
+script = ExtResource("1_eet8a")
+scales = Array[float]([0.6, 1.0, 1.5])
+current_scale = 1
+
+[node name="Mesh" parent="." instance=ExtResource("2_p0q2b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+shape = SubResource("BoxShape3D_lsgm5")
+
+[node name="FloorLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.8, 0.221)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.197937, 0.197937, 0.197937, 1)
+text = "floor"
+font = ExtResource("3_yjx84")
+outline_size = 2
+horizontal_alignment = 0
+vertical_alignment = 0
+uppercase = true
+
+[node name="Floor" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.5, 0.221)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.197937, 0.197937, 0.197937, 1)
+text = "0"
+font = ExtResource("4_xi3lc")
+font_size = 80
+outline_size = 4
+horizontal_alignment = 0
+vertical_alignment = 0
+
+[node name="Deaths" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.223678, 0.221)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.197937, 0.197937, 0.197937, 1)
+text = "0 deaths"
+font = ExtResource("3_yjx84")
+outline_size = 2
+horizontal_alignment = 2
+vertical_alignment = 0
+
+[node name="Shoots" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.524121, 0.221)
+modulate = Color(0, 0, 0, 1)
+outline_modulate = Color(0.197937, 0.197937, 0.197937, 1)
+text = "0 shoots"
+font = ExtResource("3_yjx84")
+outline_size = 2
+horizontal_alignment = 2
+vertical_alignment = 0

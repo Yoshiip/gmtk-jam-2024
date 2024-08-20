@@ -1,28 +1,74 @@
-[gd_scene load_steps=4 format=3 uid="uid://j66jiu4yuah8"]
+[gd_scene load_steps=12 format=3 uid="uid://j66jiu4yuah8"]
 
 [ext_resource type="Script" path="res://islands/exit.gd" id="1_yon24"]
+[ext_resource type="Texture2D" uid="uid://dxhox5fjoun6i" path="res://assets/particles/star.png" id="2_1opuo"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ev36p"]
-radius = 1.0
+height = 0.2
+radius = 0.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m3m5c"]
 emission_enabled = true
 emission = Color(1, 1, 0, 1)
 emission_energy_multiplier = 4.0
 
+[sub_resource type="Curve" id="Curve_ac8f0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.859031, 0), -1.20946, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ko8s1"]
+curve = SubResource("Curve_ac8f0")
+
+[sub_resource type="Gradient" id="Gradient_wdvxf"]
+colors = PackedColorArray(0.865578, 0.669415, 0, 1, 0.866667, 0.670588, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_blkdk"]
+gradient = SubResource("Gradient_wdvxf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5y8ii"]
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, 1, 0)
+spread = 15.0
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.38
+scale_max = 0.38
+color_ramp = SubResource("GradientTexture1D_blkdk")
+alpha_curve = SubResource("CurveTexture_ko8s1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao7vo"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_1opuo")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ip4bf"]
+material = SubResource("StandardMaterial3D_ao7vo")
+
 [node name="Exit" type="Node3D"]
 script = ExtResource("1_yon24")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area" type="Area3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="CollisionShape" type="CollisionShape3D" parent="Area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("CylinderShape3D_ev36p")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+[node name="Mesh" type="CSGCylinder3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 radius = 1.0
 height = 0.25
 material = SubResource("StandardMaterial3D_m3m5c")
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[node name="Particles" type="GPUParticles3D" parent="."]
+amount = 40
+preprocess = 1.0
+randomness = 1.0
+fixed_fps = 0
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_5y8ii")
+draw_pass_1 = SubResource("QuadMesh_ip4bf")
+
+[connection signal="body_entered" from="Area" to="." method="_on_area_3d_body_entered"]

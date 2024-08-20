@@ -1,6 +1,8 @@
 class_name ScaleGun
 extends Node3D
 
+@onready var root: GameRoot = get_tree().current_scene
+
 var modes := [
 	"objects",
 	"time",
@@ -8,7 +10,10 @@ var modes := [
 ]
 
 func _ready() -> void:
-	modes = get_tree().current_scene.available_modes
+	if !root.can_scale_time:
+		modes.erase("time")
+	if !root.can_scale_self:
+		modes.erase("self")
 
 
 @onready var current_mode: Label3D = $CurrentMode
@@ -23,6 +28,9 @@ var option := "+":
 	set(value):
 		option = value
 		option_label.text = option
+
+func get_mode_str() -> String:
+	return modes[mode]
 
 func _next_mode() -> void:
 	self.mode = (self.mode + 1) % modes.size()
@@ -45,13 +53,31 @@ func _process(delta: float) -> void:
 	i += delta
 	cooldown -= delta
 
-func shooted() -> void:
-	cooldown = 0.1
+func _animate_gun() -> void:
 	get_parent().rotation_degrees.x = 10
 	var tween := get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(get_parent(), "rotation:x", 0, 0.15)
 
+func scale_shooted(new_prop_scale: float) -> void:
+	GameManager.total_shoots += 1
+	_animate_gun()
+	cooldown = 0.25
+	$Pitch.pitch_scale = 1.0 + new_prop_scale / 12.0
+	$Pitch.play()
+
+func shoot_invalid() -> void:
+	$Error.play()
+
+func time_shooted() -> void:
+	GameManager.total_shoots += 1
+	_animate_gun()
+	cooldown = 1.0
+
+func self_shooted() -> void:
+	GameManager.total_shoots += 1
+	_animate_gun()
+	cooldown = 0.25
 
 var cooldown := 0.0
 

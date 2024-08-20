@@ -2,17 +2,15 @@ extends Node
 
 
 enum Musics {
+	NONE,
 	MENU,
 	PUZZLE,
 	INFILTRATION
 }
-
-const PUZZLE_MUSIC = preload("res://assets/musics/puzzle.wav")
-const INFILTRATION_MUSIC = preload("res://assets/musics/infiltration.wav")
-var current_music := Musics.MENU
-
-func _ready() -> void:
-	play(Musics.MENU)
+const MENU_MUSIC := preload("res://assets/musics/menu.mp3")
+const PUZZLE_MUSIC := preload("res://assets/musics/puzzle.wav")
+const INFILTRATION_MUSIC := preload("res://assets/musics/infiltration.wav")
+var current_music := Musics.NONE
 
 var current_stream: AudioStreamPlayer
 
@@ -25,11 +23,13 @@ func play(music: Musics) -> void:
 	current_stream = AudioStreamPlayer.new()
 	match music:
 		Musics.MENU:
-			current_stream.stream = PUZZLE_MUSIC
+			current_stream.volume_db = -20
+			current_stream.stream = MENU_MUSIC
 		Musics.PUZZLE:
+			current_stream.volume_db = -18
 			current_stream.stream = PUZZLE_MUSIC
-		Musics.INFILTRATION:
+		Musics.INFILTRATION:	
 			current_stream.stream = INFILTRATION_MUSIC
-			current_stream.volume_db = -16
+			current_stream.volume_db = -24
 	add_child(current_stream)
 	current_stream.play()

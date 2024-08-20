@@ -15,6 +15,10 @@ var trauma := 0.0
 @onready var arm: Node3D = $Mesh/Arm
 @onready var cannon_point: Marker3D = $Mesh/Arm/CannonPoint
 
+func _ready() -> void:
+	arm.rotation.y = rotation.y
+	rotation.y = 0
+
 func _get_player() -> void:
 	player = root.player
 
@@ -31,8 +35,10 @@ func shoot() -> void:
 
 
 func _process(delta: float) -> void:
+	arm.get_node("Cannon").rotation.z += delta * PI * trauma * 6.0
 	trauma *= 0.9
-	arm.position.z = -trauma
+	arm.position = -arm.transform.basis.z * trauma
+
 @onready var shoot_raycast: RayCast3D = $ShootRaycast
 
 var loading := -1.0
@@ -51,6 +57,7 @@ func _physics_process(delta: float) -> void:
 				if loading > 0.0:
 					loading -= delta
 				else:
+					
 					fire_speed -= delta * root.speed_factor()
 					var direction := (player.global_position - global_position).normalized()
 					var angle := atan2(direction.x, direction.z) + PI

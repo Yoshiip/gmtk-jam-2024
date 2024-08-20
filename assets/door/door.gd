@@ -1,14 +1,15 @@
-extends Marker3D
+extends Node3D
 
 @onready var root := get_tree().current_scene
 
+@export var speed := 10.0
 @export var inverted := false
 @export var trigger_group := 0
-@export var open_delay := 5.0
+@export var open_delay := 1.0
 
 func _ready() -> void:
 	if inverted:
-		_open()
+		delay = 0.0
 
 
 var delay := 0.0
@@ -16,37 +17,25 @@ var delay := 0.0
 
 
 func trigger(_from: Node3D) -> void:
-	_open(inverted)
 	delay = open_delay
 
+
 func trigger_once(_from: Node3D) -> void:
-	_open(inverted)
 	delay = 99999
 
+
 func untrigger(_from: Node3D) -> void:
-	_close(inverted)
+	delay = open_delay
 
+func _is_open() -> bool:
+	return $Door.position.y <= 0 if inverted else $Door.position.y >= 4
 
-func _open(invert := false) -> void:
-	print(str("open ", invert))
-	if invert:
-		_close()
-		return
-	set_process(true)
-	var tween := get_tree().create_tween()
-	tween.set_trans(Tween.TRANS_SPRING)
-	tween.tween_property($Mesh, "position:y", 5, 0.5)
+func _is_close() -> bool:
+	return $Door.position.y >= 4 if inverted else $Door.position.y <= 0
 
-func _close(invert := false) -> void:
-	if invert:
-		_open()
-		return
-	set_process(false)
-	var tween := get_tree().create_tween()
-	tween.set_trans(Tween.TRANS_SPRING)
-	tween.tween_property($Mesh, "position:y", 2, 0.5)
-
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	delay -= delta * root.speed_factor()
-	if delay < 0.0:
-		_close(inverted)
+	if delay > 0.0 and not _is_open():
+		var coll: KinematicCollision3D = $Door.move_and_collide((Vector3.DOWN if inverted else Vector3.UP) * delta * speed)
+	if delay < 0.0 and not _is_close():
+		var coll: KinematicCollision3D = $Door.move_and_collide((Vector3.UP if inverted else Vector3.DOWN) * delta * speed)

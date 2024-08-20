@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsx46wpvbxssn"]
+
+[ext_resource type="Script" path="res://levels/end/end.gd" id="1_naunk"]
+
+[node name="End" type="CanvasLayer"]
+script = ExtResource("1_naunk")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "the end"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 90.0
+offset_top = 87.0
+offset_right = 187.0
+offset_bottom = 118.0
+text = "main menu"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

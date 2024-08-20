@@ -3,5 +3,5 @@
 [ext_resource type="Script" path="res://assets/entities/clone/path_follow/clone_path_follow.gd" id="1_87lb6"]
 
 [node name="ClonePathFollow" type="PathFollow3D"]
-transform = Transform3D(0.149805, 0, 0.988716, 0, 1, 0, -0.988716, 0, 0.149805, -3.71284, 0, 0.459867)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1_87lb6")

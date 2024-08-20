@@ -9,9 +9,9 @@ func _physics_process(delta: float) -> void:
 	for body in bodies_inside:
 		var strength: float = max((max_range + (position.y - body.position.y)), 0.0) * strength * _get_scale().x
 		if is_instance_of(body, RigidBody3D):
-			body.apply_force(Vector3.UP * delta * strength * 500.0)
+			body.apply_force(transform.basis.y * delta * strength * 500.0)
 		elif is_instance_of(body, CharacterBody3D):
-			body.velocity.y += delta * strength
+			body.velocity += transform.basis.y * delta * strength * Vector3(1.0, transform.basis.y.y, 1.0)
 
 
 func _on_air_area_body_entered(body: Node3D) -> void:
@@ -21,14 +21,6 @@ func _on_air_area_body_entered(body: Node3D) -> void:
 func _on_air_area_body_exited(body: Node3D) -> void:
 	bodies_inside.erase(body)
 
-func on_scale(plus := true) -> void:
-	if plus:
-		var new_scale: float = min(current_scale + 1, scales.size() - 1)
-		current_scale = new_scale
-	else:
-		current_scale = max(current_scale - 1, 0)
-	_transition_scale()
-	
 
 func _transition_scale() -> void:
 	var tween := create_tween()

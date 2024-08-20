@@ -1,15 +1,35 @@
-extends Control
+extends Node3D
 
 
-@export var levels_count := 5
-@onready var v_box_container: VBoxContainer = $CanvasLayer/VBoxContainer
+var levels_count := 13
+@onready var levels_container: VBoxContainer = $CanvasLayer/Control/HBox/Levels
+
+@onready var credits_container: VBoxContainer = $CanvasLayer/Control/HBox/Credits/Container
+
+const CREDITS := {
+	"Yoshiip": ["Dev", {
+		"Website": "",
+	}],
+	"Troutking": ["3D Art, Textures, Rigging"],
+	"Barbedor": ["Music"],
+	"moose": ["SFX"],
+	"Vuski": ["Game Design"],
+}
+
+const CREDIT_LINE = preload("res://assets/ui/credit_line/credit_line.tscn")
 
 func _ready() -> void:
+	MusicManager.play(MusicManager.Musics.MENU)
+	for key in CREDITS:
+		var line := CREDIT_LINE.instantiate()
+		line.get_node("Header/Name").text = key
+		line.get_node("Description").text = CREDITS[key][0]
+		credits_container.add_child(line)
 	for level in range(levels_count):
 		var button := Button.new()
 		button.text = str("Level ", level)
 		button.pressed.connect(_button_pressed.bind(level))
-		v_box_container.add_child(button)
+		levels_container.add_child(button)
 	
 
 func _button_pressed(level: int) -> void:
