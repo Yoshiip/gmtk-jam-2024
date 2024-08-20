@@ -36,6 +36,6 @@ func _is_close() -> bool:
 func _physics_process(delta: float) -> void:
 	delay -= delta * root.speed_factor()
 	if delay > 0.0 and not _is_open():
-		var coll: KinematicCollision3D = $Door.move_and_collide((Vector3.DOWN if inverted else Vector3.UP) * delta * speed)
+		var coll: KinematicCollision3D = $Door.move_and_collide((Vector3.DOWN if inverted else Vector3.UP) * delta * speed * root.speed_factor())
 	if delay < 0.0 and not _is_close():
-		var coll: KinematicCollision3D = $Door.move_and_collide((Vector3.UP if inverted else Vector3.DOWN) * delta * speed)
+		var coll: KinematicCollision3D = $Door.move_and_collide((Vector3.UP if inverted else Vector3.DOWN) * delta * speed * root.speed_factor())

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq0cuqx6xjx0u"]
+[gd_scene load_steps=5 format=3 uid="uid://cq0cuqx6xjx0u"]
 
 [ext_resource type="Script" path="res://assets/crate/crate.gd" id="1_hdebo"]
-[ext_resource type="PackedScene" uid="uid://bcuc43kgruume" path="res://assets/crate/model/Box.blend" id="2_6h5fq"]
+[ext_resource type="PackedScene" uid="uid://bgxdiv20udoqu" path="res://assets/crate/model/v1/Box.gltf" id="2_2p4vo"]
+[ext_resource type="Material" uid="uid://bow7ftjkihtr2" path="res://assets/crate/model/materials/Wood.tres" id="3_dw84n"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_js8j3"]
 size = Vector3(2, 2, 2)
@@ -20,12 +21,17 @@ script = ExtResource("1_hdebo")
 scales = Array[float]([0.4, 0.65, 1.2, 1.8])
 current_scale = 1
 
-[node name="Mesh" parent="." instance=ExtResource("2_6h5fq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_js8j3")
 
 [node name="Middle" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Mesh" parent="." instance=ExtResource("2_2p4vo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Cube" parent="Mesh" index="0"]
+surface_material_override/1 = ExtResource("3_dw84n")
+
+[editable path="Mesh"]

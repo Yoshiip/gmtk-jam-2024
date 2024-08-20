@@ -16,13 +16,13 @@ emission_energy_multiplier = 4.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.859031, 0), -1.20946, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_ko8s1"]
+[sub_resource type="CurveTexture" id="CurveTexture_vhxkk"]
 curve = SubResource("Curve_ac8f0")
 
 [sub_resource type="Gradient" id="Gradient_wdvxf"]
 colors = PackedColorArray(0.865578, 0.669415, 0, 1, 0.866667, 0.670588, 0, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_blkdk"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jw21t"]
 gradient = SubResource("Gradient_wdvxf")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5y8ii"]
@@ -36,16 +36,16 @@ initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.38
 scale_max = 0.38
-color_ramp = SubResource("GradientTexture1D_blkdk")
-alpha_curve = SubResource("CurveTexture_ko8s1")
+color_ramp = SubResource("GradientTexture1D_jw21t")
+alpha_curve = SubResource("CurveTexture_vhxkk")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ao7vo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_og2xl"]
 transparency = 1
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("2_1opuo")
 
 [sub_resource type="QuadMesh" id="QuadMesh_ip4bf"]
-material = SubResource("StandardMaterial3D_ao7vo")
+material = SubResource("StandardMaterial3D_og2xl")
 
 [node name="Exit" type="Node3D"]
 script = ExtResource("1_yon24")

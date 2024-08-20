@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpplnu7bd720g"]
+[gd_scene load_steps=10 format=3 uid="uid://cpplnu7bd720g"]
 
 [ext_resource type="Script" path="res://levels/menu/menu.gd" id="1_55olg"]
 [ext_resource type="Theme" uid="uid://c6orqmnww3tlp" path="res://theme.tres" id="1_jh8i7"]
+[ext_resource type="Texture2D" uid="uid://chrp1lkk2b0g2" path="res://assets/ui/Logo.png" id="4_3sfx7"]
 [ext_resource type="Texture2D" uid="uid://cbafbtg8h256a" path="res://assets/ui/gmtk-jam-2024-logo.png" id="4_kipqg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ascdp"]
@@ -19,6 +20,13 @@ sky = SubResource("Sky_xfyfw")
 ambient_light_source = 2
 ambient_light_color = Color(0.462291, 0.462291, 0.462291, 1)
 tonemap_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_31kc7"]
+colors = PackedColorArray(0.165656, 0.165656, 0.165656, 1, 0.0923971, 0.0923971, 0.092397, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pcgd8"]
+gradient = SubResource("Gradient_31kc7")
+fill_to = Vector2(0, 1)
 
 [node name="Menu" type="Node3D"]
 script = ExtResource("1_55olg")
@@ -40,6 +48,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_jh8i7")
+
+[node name="Background" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_pcgd8")
 
 [node name="Logo" type="TextureRect" parent="CanvasLayer/Control"]
 custom_minimum_size = Vector2(64, 64)
@@ -73,25 +90,41 @@ theme_override_constants/separation = 32
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="CanvasLayer/Control/HBox/Levels"]
+[node name="Logo" type="TextureRect" parent="CanvasLayer/Control/HBox/Levels"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+texture = ExtResource("4_3sfx7")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="NewGame" type="Button" parent="CanvasLayer/Control/HBox/Levels"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
-text = "COPYLICATION"
+text = "New Game"
 
-[node name="Main" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Levels"]
+[node name="Control" type="Control" parent="CanvasLayer/Control/HBox/Levels"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/HBox/Levels/Main"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Levels"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/HBox/Levels/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Levels/HBoxContainer"]
+layout_mode = 2
+text = "All Levels"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/HBox/Levels/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Levels/Main"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/Control/HBox/Levels"]
 layout_mode = 2
-text = "debug levels"
-
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/HBox/Levels/Main"]
-layout_mode = 2
-size_flags_horizontal = 3
+columns = 4
 
 [node name="Credits" type="Panel" parent="CanvasLayer/Control/HBox"]
 custom_minimum_size = Vector2(400, 0)
@@ -109,11 +142,23 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Credits/Container"]
+[node name="Control" type="HBoxContainer" parent="CanvasLayer/Control/HBox/Credits/Container"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/HBox/Credits/Container/Control"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
 text = "credits"
 uppercase = true
 
+[node name="LinkButton" type="LinkButton" parent="CanvasLayer/Control/HBox/Credits/Container/Control"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "GitHub"
+uri = "https://github.com/Yoshiip/gmtk-jam-2024"
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.881733, -0.160557, 0.443586, 0, 0.940301, 0.340345, -0.471749, -0.300093, 0.829094, 2.79192, 2.3251, 5.19933)
+
+[connection signal="pressed" from="CanvasLayer/Control/HBox/Levels/NewGame" to="." method="_on_new_game_pressed"]

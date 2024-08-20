@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bcx7m0lb330sy"]
 
 [ext_resource type="Script" path="res://assets/camera/camera.gd" id="1_y7sro"]
-[ext_resource type="PackedScene" uid="uid://d4l7xca8yx32w" path="res://assets/camera/Camera.blend" id="2_vnl7y"]
 [ext_resource type="AudioStream" uid="uid://c3xy2hpo25fi8" path="res://assets/entities/clone/alerted.wav" id="3_8npx0"]
+[ext_resource type="PackedScene" uid="uid://vr0c6ge4ooe1" path="res://assets/camera/model/v1/Camera.gltf" id="3_purn7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kijsf"]
 size = Vector3(0.257813, 0.263733, 0.85498)
@@ -15,15 +15,11 @@ freeze = true
 script = ExtResource("1_y7sro")
 scales = Array[float]([1.0, 1.5, 2.0])
 
-[node name="Mesh" parent="." instance=ExtResource("2_vnl7y")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-
 [node name="DetectionRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0150726, -0.372048)
 target_position = Vector3(0, 0, -20)
 
 [node name="Area" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape" type="CollisionPolygon3D" parent="Area"]
 transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0, 0)
@@ -44,6 +40,9 @@ bus = &"SFX"
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_kijsf")
+
+[node name="Mesh" parent="." instance=ExtResource("3_purn7")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_area_body_exited"]

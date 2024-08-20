@@ -7,6 +7,7 @@ func _ready() -> void:
 	material = WALLS
 	use_collision = true
 	position.y -= 0.1
+	size.y -= 0.2
 	
 	var top := CSGBox3D.new()
 	top.material = FLOOR

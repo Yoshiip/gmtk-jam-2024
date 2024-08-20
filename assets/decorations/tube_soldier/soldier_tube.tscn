@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://8iblvhwe8igs"]
+
+[ext_resource type="Script" path="res://assets/decorations/tube_soldier/soldier_tube.gd" id="1_nlpsl"]
+[ext_resource type="PackedScene" uid="uid://cxxrqdhhspd3t" path="res://assets/decorations/tube_soldier/v2/TubeSoldier.gltf" id="3_vx2l8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_m77dm"]
+height = 4.5
+radius = 1.2
+
+[sub_resource type="Curve" id="Curve_1p3ir"]
+_data = [Vector2(0, 0.472527), 0.0, 0.0, 0, 0, Vector2(0.859031, 0), -1.20946, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_y7f3t"]
+curve = SubResource("Curve_1p3ir")
+
+[sub_resource type="Gradient" id="Gradient_xkd8r"]
+colors = PackedColorArray(0, 0.788336, 0.872669, 1, 0.602931, 0.856661, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2f555"]
+gradient = SubResource("Gradient_xkd8r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n6nt5"]
+lifetime_randomness = 0.2
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 7.5
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.38
+scale_max = 0.38
+color_ramp = SubResource("GradientTexture1D_2f555")
+alpha_curve = SubResource("CurveTexture_y7f3t")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_74cnd"]
+load_path = "res://.godot/imported/star.png-ee4e1d7772022e6dfb273bf974b73e9b.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2hemn"]
+transparency = 1
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_74cnd")
+
+[sub_resource type="QuadMesh" id="QuadMesh_61h67"]
+material = SubResource("StandardMaterial3D_2hemn")
+
+[node name="SoldierTube" type="RigidBody3D"]
+script = ExtResource("1_nlpsl")
+scales = Array[float]([0.75, 1.0])
+current_scale = 1
+
+[node name="CollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.40623, 0.0709162)
+shape = SubResource("CylinderShape3D_m77dm")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.436231, 4.32016, 0)
+light_color = Color(0.603922, 0.815686, 1, 1)
+light_energy = 4.0
+shadow_enabled = true
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.171343, 0.320336, -0.0171514)
+amount = 40
+preprocess = 1.0
+randomness = 1.0
+draw_order = 3
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_n6nt5")
+draw_pass_1 = SubResource("QuadMesh_61h67")
+
+[node name="Mesh" parent="." instance=ExtResource("3_vx2l8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.218121, 0, -0.0594878)

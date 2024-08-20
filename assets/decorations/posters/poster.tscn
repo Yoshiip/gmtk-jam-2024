@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2o5rj53f15og"]
+
+[ext_resource type="Script" path="res://assets/decorations/posters/poster.gd" id="1_6roqv"]
+[ext_resource type="PackedScene" uid="uid://ijxqv3su2bh4" path="res://assets/decorations/posters/base_poster.glb" id="2_r6xna"]
+[ext_resource type="Texture2D" uid="uid://bah1cu613m0ex" path="res://assets/decorations/posters/1.png" id="2_seq7q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hhtxd"]
+size = Vector3(0.84, 1.5, 0.02)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vdrev"]
+albedo_texture = ExtResource("2_seq7q")
+
+[node name="Poster" type="RigidBody3D"]
+freeze = true
+script = ExtResource("1_6roqv")
+scales = Array[float]([0.75, 1.0])
+current_scale = 1
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+shape = SubResource("BoxShape3D_hhtxd")
+
+[node name="Mesh" parent="." instance=ExtResource("2_r6xna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.05)
+
+[node name="Poster" parent="Mesh" index="0"]
+surface_material_override/1 = SubResource("StandardMaterial3D_vdrev")
+
+[editable path="Mesh"]

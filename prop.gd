@@ -26,18 +26,24 @@ func _get_scale(index = -1) -> Vector3:
 	else:
 		return Vector3(scales[index], scales[index], scales[index]) 
 
-func _can_change_scale(new_scale: float) -> bool:
+func _can_change_scale(new_scale: int) -> bool:
 	return true
+	
 	#var shape_rid := PhysicsServer3D.box_shape_create()
-	#var prop_shape_size: Vector3 = $CollisionShape.shape.size * _get_scale()
+	#var prop_shape_size: Vector3 = $CollisionShape.shape.size * _get_scale(new_scale)
+	#PhysicsServer3D.body_set_space(shape_rid, get_world_3d().space)
 	#PhysicsServer3D.shape_set_data(shape_rid, prop_shape_size / 2.0)
 #
 	#var params = PhysicsShapeQueryParameters3D.new()
 	#params.shape_rid = shape_rid
 	#
-	#params.transform = global_transform.translated(Vector3.UP * new_scale * 2.0)
+	#$Test.size = prop_shape_size
+	#var offset := Vector3.UP + Vector3.UP * _get_scale(new_scale)
+	#$Test.global_transform = global_transform.translated_local(offset)
+	#params.transform = global_transform.translated_local(offset)
 	#var space_query: Array[Dictionary] = get_world_3d().direct_space_state.intersect_shape(params)
 	#for query in space_query:
+		#print(query)
 		#if query.rid == get_rid():
 			#space_query.erase(query)
 	#PhysicsServer3D.free_rid(shape_rid)

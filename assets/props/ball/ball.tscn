@@ -1,6 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://d2g2pkvfgklty"]
+[gd_scene load_steps=5 format=3 uid="uid://d2g2pkvfgklty"]
 
 [ext_resource type="Script" path="res://assets/props/ball/ball.gd" id="1_oc7gr"]
+[ext_resource type="Material" uid="uid://ddljjt6mdagob" path="res://assets/entities/clone/outline_material.tres" id="2_w3pku"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2833d"]
+next_pass = ExtResource("2_w3pku")
+albedo_color = Color(0.431373, 0, 0, 1)
+metallic = 0.25
+roughness = 0.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_n0o1a"]
 radius = 0.25
@@ -17,6 +24,9 @@ holdable = true
 
 [node name="Mesh" type="CSGSphere3D" parent="."]
 radius = 0.25
+radial_segments = 18
+rings = 12
+material = SubResource("StandardMaterial3D_2833d")
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_n0o1a")

@@ -1,10 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddxu8amaw1cae"]
+[gd_scene load_steps=4 format=3 uid="uid://ddxu8amaw1cae"]
 
 [ext_resource type="Script" path="res://assets/ball_dispenser/ball_dispenser.gd" id="1_6f1kl"]
+[ext_resource type="PackedScene" uid="uid://c2fdo5r16qcjy" path="res://assets/ball_dispenser/ball_dispenser.gltf" id="2_634yu"]
 
-[node name="BallDispenser" type="CSGCylinder3D" groups=["GroupTrigger"]]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_n0v2c"]
+height = 4.5
+
+[node name="BallDispenser" type="StaticBody3D" groups=["GroupTrigger"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("1_6f1kl")
 
 [node name="Spawnpoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="ball_dispenser" parent="." instance=ExtResource("2_634yu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("CylinderShape3D_n0v2c")

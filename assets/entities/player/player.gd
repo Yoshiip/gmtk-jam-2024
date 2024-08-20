@@ -68,7 +68,6 @@ func _handle_interact() -> void:
 	elif main_ray.is_colliding():
 		var collider := main_ray.get_collider()
 		if is_instance_valid(collider) && collider.has_method("on_interact"):
-			print(collider.global_position.distance_to(global_position))
 			if Input.is_action_just_pressed("interact") && collider.global_position.distance_to(global_position) < 3.0:
 				collider.on_interact()
 		elif is_instance_valid(collider) && collider.get("holdable"):
@@ -80,32 +79,36 @@ func _handle_interact() -> void:
 		
 		
 	can_scale_looking = false
-	if main_ray.is_colliding():
-		var collider := main_ray.get_collider()
-		if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
-			can_scale_looking = true
-			if Input.is_action_just_pressed("shoot") && scale_gun.can_shoot():
-				if collider.on_scale(scale_gun.option == "+"):
-					trauma = 0.075
-					var prop_scale: float = collider.get("current_scale")
-					scale_gun.scale_shooted(1 if prop_scale == null else prop_scale)
-				else:
-					scale_gun.shoot_invalid()
-	#if mode == "time":
-		#if Input.is_action_just_pressed("shoot") && scale_gun.can_shoot():
-			#if scale_gun.option == "+":
-				#root.speed_up_game()
-			#else:
-				#root.slow_down_game()
-			#scale_gun.time_shooted()
-	#elif mode == "self":
-		#if (Input.is_action_just_pressed("shoot")
-			#&& scale_gun.can_shoot()):
-			#if ceil_ray_cast.is_colliding():
-				#scale_gun.shoot_invalid()
-			#else:
-				#scale_gun.self_shooted()
-				#_change_scale(scale_gun.option == "+")
+	var mode: String = scale_gun.modes[scale_gun.mode]
+	var scale_down := Input.is_action_just_pressed("scale_down")
+	var scale_up := Input.is_action_just_pressed("scale_up")
+	if mode == "objects":
+		if main_ray.is_colliding():
+			var collider := main_ray.get_collider()
+			if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
+				can_scale_looking = true
+				if (scale_down or scale_up) and scale_gun.can_shoot():
+					if collider.on_scale(scale_up):
+						trauma = 0.075
+						var prop_scale: float = collider.get("current_scale")
+						scale_gun.scale_shooted(1 if prop_scale == null else prop_scale)
+					else:
+						scale_gun.shoot_invalid()
+	elif mode == "time":
+		if (scale_down or scale_up) and scale_gun.can_shoot():
+			if scale_up:
+				root.speed_up_game()
+			elif scale_down:
+				root.slow_down_game()
+			scale_gun.time_shooted()
+	elif mode == "self":
+		if ((scale_down or scale_up)
+			and scale_gun.can_shoot()):
+			if ceil_ray_cast.is_colliding():
+				scale_gun.shoot_invalid()
+			else:
+				scale_gun.self_shooted()
+				_change_scale(scale_up)
 
 
 func _change_scale(plus := true) -> void:
@@ -173,6 +176,7 @@ func _physics_process(delta: float) -> void:
 		view_model_camera.global_transform = camera.transform
 	# Add the gravity.
 	if is_on_floor():
+		_handle_footstep(delta)
 		if not was_on_floor:
 			was_on_floor = true
 			trauma = 0.05
@@ -182,7 +186,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 	
 	_handle_interact()
-	_handle_footstep(delta)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():

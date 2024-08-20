@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy1hdkp2tvs6l"]
+[gd_scene load_steps=7 format=3 uid="uid://dy1hdkp2tvs6l"]
 
 [ext_resource type="Script" path="res://assets/buttons/pressure_button/pressure_button.gd" id="1_lm7cc"]
+[ext_resource type="AudioStream" uid="uid://kg3cq7gopb64" path="res://assets/buttons/pressure_button/button.wav" id="2_48wq3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_300cl"]
 albedo_color = Color(0.180005, 0.180005, 0.180005, 1)
@@ -49,6 +50,10 @@ font_size = 64
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("CylinderShape3D_r77ed")
+
+[node name="Active" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_48wq3")
+bus = &"SFX"
 
 [connection signal="body_entered" from="Button" to="." method="_on_button_body_entered"]
 [connection signal="body_exited" from="Button" to="." method="_on_button_body_exited"]

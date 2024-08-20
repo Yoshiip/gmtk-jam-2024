@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://ko4baaiduxuk"]
 
 [ext_resource type="Script" path="res://assets/board/board.gd" id="1_eet8a"]
-[ext_resource type="PackedScene" uid="uid://0c6dmp0iddoo" path="res://assets/board/board.blend" id="2_p0q2b"]
 [ext_resource type="FontFile" uid="uid://ctl06nwvqd17" path="res://assets/ui/fonts/FuturaCyrillicBold.ttf" id="3_yjx84"]
+[ext_resource type="PackedScene" uid="uid://did5fej5gnpk1" path="res://assets/board/model/v1/board.gltf" id="4_e0gop"]
 [ext_resource type="FontFile" uid="uid://c0ttvgvth4rp0" path="res://assets/ui/fonts/FuturaCyrillicMedium.ttf" id="4_xi3lc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lsgm5"]
@@ -13,9 +13,6 @@ freeze = true
 script = ExtResource("1_eet8a")
 scales = Array[float]([0.6, 1.0, 1.5])
 current_scale = 1
-
-[node name="Mesh" parent="." instance=ExtResource("2_p0q2b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
 
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
@@ -62,3 +59,6 @@ font = ExtResource("3_yjx84")
 outline_size = 2
 horizontal_alignment = 2
 vertical_alignment = 0
+
+[node name="Mesh" parent="." instance=ExtResource("4_e0gop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)

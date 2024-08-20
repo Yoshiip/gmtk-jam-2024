@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://diwwv3x5yk7j3"]
 
-[ext_resource type="PackedScene" uid="uid://wy8824m7n4su" path="res://assets/world/hole_tile/hole_tile.blend" id="1_kgqwe"]
+[ext_resource type="PackedScene" uid="uid://84qndjr2l3d" path="res://assets/world/hole_tile/model/v1/hole_tile.gltf" id="1_01nmf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_roct6"]
 friction = 2.0
@@ -14,6 +14,4 @@ physics_material_override = SubResource("PhysicsMaterial_roct6")
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 shape = SubResource("ConcavePolygonShape3D_vn1fc")
 
-[node name="Mesh" parent="." instance=ExtResource("1_kgqwe")]
-
-[editable path="Mesh"]
+[node name="hole_tile" parent="." instance=ExtResource("1_01nmf")]

@@ -4,22 +4,44 @@ extends Node3D
 @onready var root: GameRoot = get_tree().current_scene
 
 
-@onready var option_label: Label3D = $ScaleGun/Option
+@onready var mode_label: Label3D = $ScaleGun/Mode
 
+var modes := [
+	"objects",
+	"time",
+	"self"
+]
 
-var option := "+":
+var mode := 0:
 	set(value):
-		option = value
-		option_label.text = option
-		option_label.modulate = Color.GREEN if "+" else Color.RED
+		mode = value
+		mode_label.text = modes[mode].capitalize()
+
+
+
+func _ready() -> void:
+	if !root.can_scale_time:
+		modes.erase("time")
+	if !root.can_scale_self:
+		modes.erase("self")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("switch_polarity"):
-		self.option = "-" if self.option == "+" else "+"
-
+	if event.is_action_pressed("prev_mode"):
+		_prev_mode()
+	if event.is_action_pressed("next_mode"):
+		_next_mode()
 
 func _process(delta: float) -> void:
 	cooldown -= delta
+
+
+func _next_mode() -> void:
+	self.mode = (self.mode + 1) % modes.size()
+
+
+func _prev_mode() -> void:
+	self.mode = fmod(float(self.mode) - 1.0, float(modes.size()))
+
 
 func _animate_gun() -> void:
 	rotation_degrees.x = 10

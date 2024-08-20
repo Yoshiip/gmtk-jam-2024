@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dv4g2c4pnb5og"]
 
 [ext_resource type="Script" path="res://assets/spikes/spikes.gd" id="1_hi3fq"]
-[ext_resource type="PackedScene" uid="uid://0jk6g4m4oyba" path="res://assets/spikes/spikes.blend" id="1_wqfnl"]
+[ext_resource type="PackedScene" uid="uid://jij5ot85ufbb" path="res://assets/spikes/model/v1/spikes.gltf" id="2_k36k0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3dq5u"]
 size = Vector3(3.6, 0.4, 3.6)
@@ -9,10 +9,10 @@ size = Vector3(3.6, 0.4, 3.6)
 [node name="Spikes" type="Area3D"]
 script = ExtResource("1_hi3fq")
 
-[node name="Mesh" parent="." instance=ExtResource("1_wqfnl")]
-
 [node name="CollisionShape" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("BoxShape3D_3dq5u")
+
+[node name="spikes" parent="." instance=ExtResource("2_k36k0")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

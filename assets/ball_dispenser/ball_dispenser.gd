@@ -1,4 +1,4 @@
-extends CSGCylinder3D
+extends StaticBody3D
 @onready var spawnpoint: Marker3D = $Spawnpoint
 
 @export var instance: PackedScene

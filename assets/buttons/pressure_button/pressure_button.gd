@@ -20,6 +20,8 @@ var bodies_inside: Array[CollisionObject3D]
 func _on_button_body_entered(body: Node3D) -> void:
 	if body.get("mass"):
 		bodies_inside.append(body)
+
+
 func _on_button_body_exited(body: Node3D) -> void:
 	if body.get("mass"):
 		bodies_inside.erase(body)
@@ -46,6 +48,7 @@ func _calculate_weight() -> void:
 	if not was_valid and current_weight >= target_weight:
 		root.trigger_group_once(self, trigger_group)
 		was_valid = true
+		$Active.play()
 	if was_valid and current_weight < target_weight:
 		root.untrigger_group(self, trigger_group)
 		was_valid = false

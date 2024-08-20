@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bs0h4d8fwsyer"]
+[gd_scene load_steps=10 format=3 uid="uid://bs0h4d8fwsyer"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_834cr"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="3_p2553"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="5_dgir0"]
 [ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="6_n6410"]
 [ext_resource type="PackedScene" uid="uid://ko4baaiduxuk" path="res://assets/board/board.tscn" id="8_ugkog"]
+[ext_resource type="PackedScene" uid="uid://b2o5rj53f15og" path="res://assets/decorations/posters/poster.tscn" id="9_c58q0"]
 
 [node name="1" type="Node3D"]
 script = ExtResource("1_834cr")
@@ -41,3 +42,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 
 
 [node name="Board" parent="." instance=ExtResource("8_ugkog")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 2, -3)
+
+[node name="Poster" parent="." instance=ExtResource("9_c58q0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -8.758, 1.5, 4.9)

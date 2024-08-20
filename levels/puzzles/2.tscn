@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bjnu62o7whn8p"]
+[gd_scene load_steps=14 format=3 uid="uid://bjnu62o7whn8p"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_6eag8"]
 [ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="2_4260l"]
@@ -7,11 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://dudjlv5uhbhts" path="res://templates/template_door_up.tscn" id="6_l15f0"]
 [ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="6_t8m5f"]
 [ext_resource type="PackedScene" uid="uid://ddxu8amaw1cae" path="res://assets/ball_dispenser/ball_dispenser.tscn" id="7_mksjc"]
-[ext_resource type="Material" uid="uid://cw1362kpvskh8" path="res://assets/materials/stylized/floor.tres" id="7_vv2a5"]
+[ext_resource type="Script" path="res://levels/platform.gd" id="7_y0oc5"]
 [ext_resource type="PackedScene" uid="uid://spiy5h7kxiip" path="res://assets/button/small/small_button.tscn" id="8_e0a6x"]
 [ext_resource type="PackedScene" uid="uid://diwwv3x5yk7j3" path="res://assets/world/hole_tile/hole_tile.tscn" id="10_61m33"]
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="11_vy3ct"]
 [ext_resource type="PackedScene" uid="uid://ko4baaiduxuk" path="res://assets/board/board.tscn" id="12_le1wh"]
+[ext_resource type="PackedScene" uid="uid://c1atiwbei13yq" path="res://assets/help_board/help_board.tscn" id="13_byjta"]
 
 [node name="2" type="Node3D"]
 script = ExtResource("1_6eag8")
@@ -43,14 +44,14 @@ trigger_group = 1
 
 [node name="LevelTemplate1" parent="." instance=ExtResource("6_l15f0")]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="Platform" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 3, 0.977975, 11.2931)
-material_override = ExtResource("7_vv2a5")
 use_collision = true
 size = Vector3(4, 11.6624, 6.21667)
+script = ExtResource("7_y0oc5")
 
 [node name="BallDispenser" parent="." instance=ExtResource("7_mksjc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 10, 9.5)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 10, 9.5)
 
 [node name="Button" parent="." instance=ExtResource("8_e0a6x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 6, -9)
@@ -80,5 +81,9 @@ metadata/_edit_lock_ = true
 [node name="Board" parent="." instance=ExtResource("12_le1wh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 8, -5)
 
+[node name="Board2" parent="." instance=ExtResource("13_byjta")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 8, -7)
+title = "RESTART"
+text = "Press [R] to restart the current level."
+
 [editable path="Button"]
-[editable path="Button/Mesh"]

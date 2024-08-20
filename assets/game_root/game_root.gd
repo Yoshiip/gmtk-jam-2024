@@ -45,7 +45,10 @@ func _ready() -> void:
 	if is_infiltration:
 		MusicManager.play(MusicManager.Musics.INFILTRATION)
 	else:
-		MusicManager.play(MusicManager.Musics.PUZZLE)
+		if level_id >= 5:
+			MusicManager.play(MusicManager.Musics.PUZZLE_2)
+		else:
+			MusicManager.play(MusicManager.Musics.PUZZLE)
 	_add_player()
 	
 	canvas_layer = CANVAS_LAYER.instantiate()

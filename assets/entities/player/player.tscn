@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cccx1at3b2nls"]
+[gd_scene load_steps=9 format=3 uid="uid://cccx1at3b2nls"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_if0wq"]
 [ext_resource type="PackedScene" uid="uid://blxpvc6uugngm" path="res://assets/entities/player/view_model_camera.tscn" id="2_no31q"]
@@ -12,13 +12,6 @@
 radius = 0.4
 height = 1.8
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_oekmp"]
-radius = 0.4
-height = 1.8
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rpc2o"]
-albedo_color = Color(0.219608, 1, 1, 1)
-
 [node name="Player" type="CharacterBody3D" groups=["Player"]]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -28,11 +21,6 @@ script = ExtResource("1_if0wq")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_58omm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
-mesh = SubResource("CapsuleMesh_oekmp")
-surface_material_override/0 = SubResource("StandardMaterial3D_rpc2o")
 
 [node name="Head" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)

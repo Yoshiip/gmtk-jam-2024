@@ -7,11 +7,6 @@ func _ready() -> void:
 func on_scale(scaled_up := true) -> bool:
 	if scaled_up:
 		var new_scale: float = min(current_scale + 1, scales.size() - 1)
-		for contact in get_colliding_bodies():
-			if is_instance_of(contact, CharacterBody3D):
-				return false
-			if is_instance_of(contact, RigidBody3D):
-				contact.apply_impulse((position - contact.position).normalized() * 5.0)
 		if _can_change_scale(new_scale):
 			current_scale = new_scale
 		else:

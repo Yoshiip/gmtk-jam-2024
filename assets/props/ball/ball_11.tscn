@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c07olvjqjynfe"]
+[gd_scene load_steps=3 format=3 uid="uid://c07olvjqjynfe"]
 
 [ext_resource type="PackedScene" uid="uid://d2g2pkvfgklty" path="res://assets/props/ball/ball.tscn" id="1_sw88p"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_synq4"]
+friction = 0.0
+
 [node name="Ball_11" instance=ExtResource("1_sw88p")]
 axis_lock_linear_z = true
+physics_material_override = SubResource("PhysicsMaterial_synq4")

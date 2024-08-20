@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://assets/entities/player/scale_gun/scale_gun.gd" id="1_7ms87"]
 [ext_resource type="PackedScene" uid="uid://chwxnujn0tfqd" path="res://assets/entities/player/scale_gun/Model/v3/ScaleGun.gltf" id="4_jkh03"]
-[ext_resource type="FontFile" uid="uid://ctl06nwvqd17" path="res://assets/ui/fonts/FuturaCyrillicBold.ttf" id="5_h6bv8"]
+[ext_resource type="FontFile" uid="uid://c0ttvgvth4rp0" path="res://assets/ui/fonts/FuturaCyrillicMedium.ttf" id="5_8h1s8"]
 [ext_resource type="AudioStream" uid="uid://drd7r41kpr061" path="res://assets/entities/player/scale_gun/sfx/2.wav" id="17_kv32u"]
 [ext_resource type="AudioStream" uid="uid://03g0gir1qq5x" path="res://assets/entities/player/scale_gun/sfx/error.wav" id="18_x7if7"]
 
@@ -27,14 +27,14 @@ layers = 2
 [node name="Hand" parent="ScaleGun" index="1"]
 layers = 2
 
-[node name="Option" type="Label3D" parent="ScaleGun"]
-transform = Transform3D(1, 0, 0, 0, 0.647894, 0.761731, 0, -0.761731, 0.647894, 0, 0.183928, -0.187781)
+[node name="Mode" type="Label3D" parent="ScaleGun"]
+transform = Transform3D(1, 0, 0, 0, 0.647894, 0.761731, 0, -0.761731, 0.647894, 0, 0.172166, -0.172769)
 layers = 2
 pixel_size = 0.002
 double_sided = false
-modulate = Color(0, 1, 0, 1)
-text = "+"
-font = ExtResource("5_h6bv8")
-font_size = 48
+text = "Objects"
+font = ExtResource("5_8h1s8")
+font_size = 16
+outline_size = 6
 
 [editable path="ScaleGun"]

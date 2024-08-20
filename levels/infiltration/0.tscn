@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ctpilyobcaiwd"]
+[gd_scene load_steps=10 format=3 uid="uid://ctpilyobcaiwd"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_kwrk6"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="2_ie5j8"]
@@ -6,7 +6,6 @@
 [ext_resource type="Material" uid="uid://cw1362kpvskh8" path="res://assets/materials/stylized/floor.tres" id="3_spdx0"]
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="4_vnw3h"]
 [ext_resource type="PackedScene" uid="uid://bcx7m0lb330sy" path="res://assets/camera/camera.tscn" id="7_y8s2a"]
-[ext_resource type="PackedScene" uid="uid://dlqq1l2weh0is" path="res://assets/clone_tube/clone_tube.tscn" id="8_n4q17"]
 
 [sub_resource type="Curve3D" id="Curve3D_j2pop"]
 _data = {
@@ -151,9 +150,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 14.6)
 [node name="Crate2" parent="." instance=ExtResource("2_ie5j8")]
 transform = Transform3D(0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 1.8, 2, 14.5)
 current_scale = 0
-
-[node name="CloneTube" parent="." instance=ExtResource("8_n4q17")]
-transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, -1, 0, 6)
-
-[node name="CloneTube2" parent="." instance=ExtResource("8_n4q17")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 2.9, 0, 6.1)

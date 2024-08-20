@@ -1,18 +1,20 @@
-[gd_scene load_steps=9 format=3 uid="uid://dded0gl71ugkw"]
+[gd_scene load_steps=11 format=3 uid="uid://dded0gl71ugkw"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_3ryrd"]
 [ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="2_dgj5m"]
+[ext_resource type="Script" path="res://levels/platform.gd" id="5_3g55h"]
 [ext_resource type="PackedScene" uid="uid://d2g2pkvfgklty" path="res://assets/props/ball/ball.tscn" id="7_t1qxs"]
 [ext_resource type="PackedScene" uid="uid://b05tad6jesfxi" path="res://templates/template_empty_large.tscn" id="8_8cmk0"]
 [ext_resource type="PackedScene" uid="uid://dy1hdkp2tvs6l" path="res://assets/buttons/pressure_button/pressure_button.tscn" id="9_5hu08"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="10_280o3"]
+[ext_resource type="PackedScene" uid="uid://b2o5rj53f15og" path="res://assets/decorations/posters/poster.tscn" id="10_y5sq8"]
 [ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="11_nvfic"]
 [ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="12_cog8a"]
 
-[node name="12" type="Node3D"]
+[node name="11" type="Node3D"]
 script = ExtResource("1_3ryrd")
 can_scale_self = true
-level_id = 12
+level_id = 11
 
 [node name="Spawnpoint" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
@@ -49,15 +51,13 @@ material = ExtResource("12_cog8a")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1.5, -4)
-use_collision = true
 size = Vector3(4, 3, 2)
-material = ExtResource("12_cog8a")
+script = ExtResource("5_3g55h")
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.75, -6.5)
-use_collision = true
 size = Vector3(4, 1.5, 3)
-material = ExtResource("12_cog8a")
+script = ExtResource("5_3g55h")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 4, -4)
@@ -148,5 +148,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12, -13)
 
 [node name="CSGBox3D4" parent="PuzzleTemplate0/Walls" index="2"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13, 12, -5.68248e-07)
+
+[node name="Poster" parent="." instance=ExtResource("10_y5sq8")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 15, 2.5, 4)
 
 [editable path="PuzzleTemplate0"]
