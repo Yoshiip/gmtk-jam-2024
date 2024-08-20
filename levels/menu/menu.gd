@@ -1,16 +1,16 @@
 extends Node3D
 
 
-var levels_count := 13
+var levels_count := 12
 @onready var levels_container: VBoxContainer = $CanvasLayer/Control/HBox/Levels
 
 @onready var credits_container: VBoxContainer = $CanvasLayer/Control/HBox/Credits/Container
 
 const CREDITS := {
-	"Yoshiip": ["Dev", {
+	"Yoshiip": ["Code", {
 		"Website": "",
 	}],
-	"Troutking": ["3D Art, Textures, Rigging"],
+	"Troutking": ["2D Art, 3D Art, Textures"],
 	"Barbedor": ["Music"],
 	"moose": ["SFX"],
 	"Vuski": ["Game Design"],
@@ -27,7 +27,7 @@ func _ready() -> void:
 		credits_container.add_child(line)
 	for level in range(levels_count):
 		var button := Button.new()
-		button.text = str("Level ", level)
+		button.text = str("Level ", level + 1)
 		button.pressed.connect(_button_pressed.bind(level))
 		levels_container.add_child(button)
 	

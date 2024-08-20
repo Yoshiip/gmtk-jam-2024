@@ -200,7 +200,7 @@ text = "Scale"
 [node name="Hold" type="Label" parent="Container/Actions"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_74d6x")
-text = "Hold"
+text = "Hold [E]"
 
 [node name="PauseMenu" type="Panel" parent="Container"]
 process_mode = 3
@@ -300,13 +300,35 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5dek2")
 
-[node name="Label" type="Label" parent="Container/Weight"]
+[node name="Container" type="HBoxContainer" parent="Container/Weight"]
 layout_mode = 1
-offset_left = 11.0
-offset_top = -14.0
-offset_right = 55.0
-offset_bottom = 18.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -8.0
+offset_top = -13.0
+offset_right = -8.0
+offset_bottom = 19.0
+grow_horizontal = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Container/Weight/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.758192, 0.758192, 0.758192, 1)
+theme_override_font_sizes/font_size = 16
+text = "Weight  "
+horizontal_alignment = 2
+
+[node name="CurrentWeight" type="Label" parent="Container/Weight/Container"]
+layout_mode = 2
 text = "80"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="Container/Weight/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.758192, 0.758192, 0.758192, 1)
+theme_override_font_sizes/font_size = 16
+text = "lb"
+horizontal_alignment = 2
 
 [connection signal="pressed" from="Container/PauseMenu/VBoxContainer/GridContainer/Resume" to="Container/PauseMenu" method="_on_resume_pressed"]
 [connection signal="pressed" from="Container/PauseMenu/VBoxContainer/GridContainer/RestartFloor" to="Container/PauseMenu" method="_on_restart_floor_pressed"]

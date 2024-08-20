@@ -50,6 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		head.rotate_y(-event.relative.x * LOOK_SENSITIVITY)
 		camera.rotate_x(-event.relative.y * LOOK_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-80), deg_to_rad(80))
+		view_model_camera.sway(Vector2(event.relative.x, event.relative.y))
 
 const SCALABLE_FLAG := 2
 var trauma := 0.0
@@ -78,35 +79,33 @@ func _handle_interact() -> void:
 					holded = collider
 		
 		
-	var mode: String = scale_gun.modes[scale_gun.mode]
-	if mode == "objects":
-		can_scale_looking = false
-		if main_ray.is_colliding():
-			var collider := main_ray.get_collider()
-			if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
-				can_scale_looking = true
-				if Input.is_action_just_pressed("shoot") && scale_gun.can_shoot():
-					if collider.on_scale(scale_gun.option == "+"):
-						trauma = 0.125
-						var prop_scale: float = collider.get("current_scale")
-						scale_gun.scale_shooted(1 if prop_scale == null else prop_scale)
-					else:
-						scale_gun.shoot_invalid()
-	elif mode == "time":
-		if Input.is_action_just_pressed("shoot") && scale_gun.can_shoot():
-			if scale_gun.option == "+":
-				root.speed_up_game()
-			else:
-				root.slow_down_game()
-			scale_gun.time_shooted()
-	elif mode == "self":
-		if (Input.is_action_just_pressed("shoot")
-			&& scale_gun.can_shoot()):
-			if ceil_ray_cast.is_colliding():
-				scale_gun.shoot_invalid()
-			else:
-				scale_gun.self_shooted()
-				_change_scale(scale_gun.option == "+")
+	can_scale_looking = false
+	if main_ray.is_colliding():
+		var collider := main_ray.get_collider()
+		if is_instance_valid(collider) && collider.collision_layer ^ SCALABLE_FLAG == 1:
+			can_scale_looking = true
+			if Input.is_action_just_pressed("shoot") && scale_gun.can_shoot():
+				if collider.on_scale(scale_gun.option == "+"):
+					trauma = 0.075
+					var prop_scale: float = collider.get("current_scale")
+					scale_gun.scale_shooted(1 if prop_scale == null else prop_scale)
+				else:
+					scale_gun.shoot_invalid()
+	#if mode == "time":
+		#if Input.is_action_just_pressed("shoot") && scale_gun.can_shoot():
+			#if scale_gun.option == "+":
+				#root.speed_up_game()
+			#else:
+				#root.slow_down_game()
+			#scale_gun.time_shooted()
+	#elif mode == "self":
+		#if (Input.is_action_just_pressed("shoot")
+			#&& scale_gun.can_shoot()):
+			#if ceil_ray_cast.is_colliding():
+				#scale_gun.shoot_invalid()
+			#else:
+				#scale_gun.self_shooted()
+				#_change_scale(scale_gun.option == "+")
 
 
 func _change_scale(plus := true) -> void:
@@ -144,8 +143,8 @@ func _process(delta: float) -> void:
 	trauma *= 0.75
 	$Head/Camera.h_offset = randf_range(-trauma, trauma)
 	$Head/Camera.v_offset = randf_range(-trauma, trauma)
-	view_model_camera.h_offset = randf_range(-trauma, trauma)
-	view_model_camera.v_offset = randf_range(-trauma, trauma)
+	view_model_camera.h_offset = randf_range(-trauma, trauma) * 0.1
+	view_model_camera.v_offset = randf_range(-trauma, trauma) * 0.1
 
 func _handle_footstep(delta: float) -> void:
 	footstep_timer -= ((velocity * Vector3(1, 0, 1)).length() / SPEED) * delta

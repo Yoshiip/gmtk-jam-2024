@@ -8,8 +8,8 @@ enum Musics {
 	INFILTRATION
 }
 const MENU_MUSIC := preload("res://assets/musics/menu.mp3")
-const PUZZLE_MUSIC := preload("res://assets/musics/puzzle.wav")
-const INFILTRATION_MUSIC := preload("res://assets/musics/infiltration.wav")
+const PUZZLE_MUSIC = preload("res://assets/musics/puzzle.mp3")
+const INFILTRATION_MUSIC = preload("res://assets/musics/infiltration.mp3")
 var current_music := Musics.NONE
 
 var current_stream: AudioStreamPlayer

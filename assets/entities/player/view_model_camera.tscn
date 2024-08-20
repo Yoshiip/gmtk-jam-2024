@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://blxpvc6uugngm"]
+[gd_scene load_steps=3 format=3 uid="uid://blxpvc6uugngm"]
 
+[ext_resource type="Script" path="res://assets/entities/player/view_model_camera.gd" id="1_0t5sk"]
 [ext_resource type="PackedScene" uid="uid://dtdv1kfw8jy5l" path="res://assets/entities/player/scale_gun/scale_gun.tscn" id="1_26sa7"]
 
 [node name="ViewModelCamera" type="Camera3D"]
+script = ExtResource("1_0t5sk")
 
 [node name="FPSRig" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.455, -0.166, -0.278)
 
 [node name="ScaleGun" parent="FPSRig" instance=ExtResource("1_26sa7")]
+transform = Transform3D(0.994522, 0, -0.104528, 0, 1, 0, 0.104528, 0, 0.994522, 0.24, -0.115, -0.545)

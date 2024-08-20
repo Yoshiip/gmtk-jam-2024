@@ -1,31 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1bbhri0ikgwo"]
+[gd_scene load_steps=10 format=3 uid="uid://d1bbhri0ikgwo"]
 
 [ext_resource type="Script" path="res://assets/game_root/game_root.gd" id="1_yg5u1"]
-[ext_resource type="PackedScene" uid="uid://cbsd11fpqdgfp" path="res://templates/template_height.tscn" id="5_j5j0a"]
 [ext_resource type="PackedScene" uid="uid://ko4baaiduxuk" path="res://assets/board/board.tscn" id="5_lduma"]
 [ext_resource type="PackedScene" uid="uid://cq0cuqx6xjx0u" path="res://assets/crate/crate.tscn" id="5_vc7j7"]
+[ext_resource type="Script" path="res://levels/platform.gd" id="6_naud6"]
+[ext_resource type="PackedScene" uid="uid://b05tad6jesfxi" path="res://templates/template_empty_large.tscn" id="6_vmuks"]
+[ext_resource type="PackedScene" uid="uid://biomje0x5ytv5" path="res://assets/door/door.tscn" id="7_52b05"]
+[ext_resource type="Material" uid="uid://dcdwn2riwrb3w" path="res://assets/materials/stylized/walls.tres" id="7_h5va1"]
+[ext_resource type="PackedScene" uid="uid://dy1hdkp2tvs6l" path="res://assets/buttons/pressure_button/pressure_button.tscn" id="8_exb3e"]
 [ext_resource type="PackedScene" uid="uid://j66jiu4yuah8" path="res://islands/exit.tscn" id="10_yfatl"]
 
 [node name="0" type="Node3D"]
 script = ExtResource("1_yg5u1")
 
 [node name="Spawnpoint" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, 6)
 
 [node name="Crate" parent="." instance=ExtResource("5_vc7j7")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -3, 2, -3)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -16, 1.9, -8)
+current_scale = 2
 
 [node name="Crate2" parent="." instance=ExtResource("5_vc7j7")]
-transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, 1, 2, -5)
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 6, 2, 3)
 
 [node name="Crate3" parent="." instance=ExtResource("5_vc7j7")]
 transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 5, 2, -5)
 current_scale = 2
 
-[node name="Exit" parent="." instance=ExtResource("10_yfatl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.73726, 4.03766, -9.13061)
+[node name="Crate4" parent="." instance=ExtResource("5_vc7j7")]
+transform = Transform3D(-0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, 5.2, 6, -5)
 
-[node name="LevelTemplate1" parent="." instance=ExtResource("5_j5j0a")]
+[node name="Exit" parent="." instance=ExtResource("10_yfatl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.7373, 4.03766, -0.13061)
 
 [node name="Board" parent="." instance=ExtResource("5_lduma")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -12, 2, 6)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24, 2, 6)
+
+[node name="Platform" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 2, 0)
+size = Vector3(32, 4, 8)
+script = ExtResource("6_naud6")
+
+[node name="PuzzleTemplate0" parent="." instance=ExtResource("6_vmuks")]
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, 5.5)
+size = Vector3(1, 8, 21)
+material = ExtResource("7_h5va1")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 4, -13.5)
+size = Vector3(1, 8, 5)
+material = ExtResource("7_h5va1")
+
+[node name="Door" parent="." instance=ExtResource("7_52b05")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, -8)
+inverted = true
+open_delay = 0.0
+
+[node name="PressureButton" parent="." instance=ExtResource("8_exb3e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.8532, 0.00012207, -7.92345)

@@ -57,7 +57,7 @@ func _ready() -> void:
 	vignette_material = canvas_layer.get_node("Container/Vignette").material
 	actions = canvas_layer.get_node("Container/Actions")
 	crosshair = canvas_layer.get_node("Container/Crosshair")
-	weight_label = canvas_layer.get_node("Container/Weight/Label")
+	weight_label = canvas_layer.get_node("Container/Weight/Container/CurrentWeight")
 	
 	if is_infiltration:
 		var clones : Array[Clone]
